@@ -1,4 +1,4 @@
-package domain.usecases.Empregado;
+package domain.usecases.Usuario;
 
 import domain.entities.Usuario.Empregado;
 

@@ -4,6 +4,7 @@ public class Empregado {
     private int id;
     private String username;
     private String senha;
+    private Boolean estaLogado;
 
     public Empregado(String username, String senha) {
         this.username = username;
@@ -32,6 +33,18 @@ public class Empregado {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Boolean estaLogado() {
+        return this.estaLogado;
+    }
+
+    public void logar() {
+        this.estaLogado = true;
+    }
+
+    public void deslogar(){
+        this.estaLogado = false;
     }
 
     @Override

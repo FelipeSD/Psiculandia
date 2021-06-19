@@ -1,4 +1,4 @@
-package domain.usecases.Administrador;
+package domain.usecases.Usuario;
 
 import domain.entities.Usuario.Administrador;
 import domain.utils.DAO;

@@ -1,7 +1,7 @@
 package application.repository;
 
 import domain.entities.Usuario.Empregado;
-import domain.usecases.Empregado.EmpregadoDAO;
+import domain.usecases.Usuario.EmpregadoDAO;
 
 import java.util.*;
 
@@ -51,5 +51,16 @@ public class InMemoryEmpregadoDAO implements EmpregadoDAO {
     @Override
     public boolean delete(Empregado empregado) {
         return deleteByKey(empregado.getId());
+    }
+
+    @Override
+    public Optional<Empregado> findByUsername(String username) {
+        for(Map.Entry<Integer, Empregado> empregado : db.entrySet()){
+            if(empregado.getValue().getUsername().equals(username)){
+                return Optional.of(db.get(empregado.getKey()));
+            }
+        }
+
+        return Optional.empty();
     }
 }

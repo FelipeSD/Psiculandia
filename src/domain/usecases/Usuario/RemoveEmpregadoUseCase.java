@@ -1,9 +1,7 @@
-package domain.usecases.Empregado;
+package domain.usecases.Usuario;
 
 import domain.entities.Usuario.Empregado;
 import domain.utils.EntityNotFoundException;
-
-import java.awt.print.Book;
 
 public class RemoveEmpregadoUseCase {
     private final EmpregadoDAO empregadoDAO;

@@ -1,8 +1,11 @@
 package application.main;
 
 import application.repository.InMemoryEmpregadoDAO;
+import application.repository.InMemoryTanqueDAO;
+import domain.entities.Tanque.Tanque;
 import domain.entities.Usuario.Administrador;
 import domain.entities.Usuario.Empregado;
+import domain.usecases.Tanque.*;
 import domain.usecases.Usuario.*;
 import domain.utils.InvalidPasswordException;
 
@@ -13,6 +16,12 @@ public class Main {
     private static RemoveEmpregadoUseCase removeEmpregadoUseCase;
     private static FindEmpregadoUseCase findEmpregadoUseCase;
     private static LoginEmpregadoUseCase loginEmpregadoUseCase;
+
+    private static CreateTanqueUseCase createTanqueUseCase;
+    private static UpdateTanqueUseCase updateTanqueUseCase;
+    private static RemoveTanqueUseCase removeTanqueUseCase;
+    private static FindTanqueUseCase findTanqueUseCase;
+
 
     public static void main(String[] args) {
         configureInjection();
@@ -37,6 +46,13 @@ public class Main {
             System.out.println("e = " + e);
         }
 
+        // CRIANDO TANQUES
+        Tanque tanque1 = new Tanque("tilápia");
+        createTanqueUseCase.insert(tanque1);
+        
+        // LISTANDO TANQUES
+        findTanqueUseCase.findAll().forEach(tanque -> System.out.println("tanque = " + tanque));
+        
     }
 
     private static void configureInjection() {
@@ -46,6 +62,12 @@ public class Main {
         removeEmpregadoUseCase = new RemoveEmpregadoUseCase(empregadoDAO);
         findEmpregadoUseCase = new FindEmpregadoUseCase(empregadoDAO);
         loginEmpregadoUseCase = new LoginEmpregadoUseCase(empregadoDAO);
-        
+
+        TanqueDAO tanqueDAO = new InMemoryTanqueDAO();
+        createTanqueUseCase = new CreateTanqueUseCase(tanqueDAO);
+        updateTanqueUseCase = new UpdateTanqueUseCase(tanqueDAO);
+        removeTanqueUseCase = new RemoveTanqueUseCase(tanqueDAO);
+        findTanqueUseCase = new FindTanqueUseCase(tanqueDAO);
+
     }
 }

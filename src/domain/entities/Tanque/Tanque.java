@@ -1,7 +1,7 @@
 package domain.entities.Tanque;
 
 public class Tanque {
-    private int id;
+    private int id; // número de identificação
     private String especieCriada;
     private int qtdAlevinos;
     private double precoManutencao;
@@ -10,6 +10,13 @@ public class Tanque {
     private String dataFim;
     private boolean checkAlimentado;
     private double[] historicoSemanal;
+
+    public Tanque() {
+    }
+
+    public Tanque(String especieCriada) {
+        this.especieCriada = especieCriada;
+    }
 
     public int getId() {
         return id;
@@ -81,5 +88,15 @@ public class Tanque {
 
     public void setHistoricoSemanal(double[] historicoSemanal) {
         this.historicoSemanal = historicoSemanal;
+    }
+
+    @Override
+    public String toString() {
+        return "Tanque{" +
+                "especieCriada='" + especieCriada + '\'' +
+                ", qtdAlevinos=" + qtdAlevinos +
+                ", dataInicio='" + dataInicio + '\'' +
+                ", dataFim='" + dataFim + '\'' +
+                '}';
     }
 }

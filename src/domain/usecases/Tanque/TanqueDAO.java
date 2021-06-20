@@ -1,4 +1,8 @@
 package domain.usecases.Tanque;
 
-public class TanqueDAO {
+import domain.entities.Tanque.Tanque;
+import domain.utils.DAO;
+
+public interface TanqueDAO extends DAO<Tanque, Integer> {
+
 }

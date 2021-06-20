@@ -1,11 +1,27 @@
 package domain.entities.Fornecedor;
 
 public class Fornecedor {
+    private int id;
     private String cnpj;
     private String nome;
     private String enedereco;
     private String[] produtos;
     private String tempoEntrega;
+
+    public Fornecedor() {
+    }
+
+    public Fornecedor(String nome) {
+        this.nome = nome;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getCnpj() {
         return cnpj;
@@ -45,5 +61,12 @@ public class Fornecedor {
 
     public void setTempoEntrega(String tempoEntrega) {
         this.tempoEntrega = tempoEntrega;
+    }
+
+    @Override
+    public String toString() {
+        return "Fornecedor{" +
+                "nome='" + nome + '\'' +
+                '}';
     }
 }

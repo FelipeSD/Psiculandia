@@ -1,10 +1,13 @@
 package application.main;
 
 import application.repository.InMemoryEmpregadoDAO;
+import application.repository.InMemoryFornecedorDAO;
 import application.repository.InMemoryTanqueDAO;
+import domain.entities.Fornecedor.Fornecedor;
 import domain.entities.Tanque.Tanque;
 import domain.entities.Usuario.Administrador;
 import domain.entities.Usuario.Empregado;
+import domain.usecases.Fornecedor.*;
 import domain.usecases.Tanque.*;
 import domain.usecases.Usuario.*;
 import domain.utils.InvalidPasswordException;
@@ -22,10 +25,14 @@ public class Main {
     private static RemoveTanqueUseCase removeTanqueUseCase;
     private static FindTanqueUseCase findTanqueUseCase;
 
+    private static CreateFornecedorUseCase createFornecedorUseCase;
+    private static UpdateFornecedorUseCase updateFornecedorUseCase;
+    private static RemoveFornecedorUseCase removeFornecedorUseCase;
+    private static FindFornecedorUseCase findFornecedorUseCase;
 
     public static void main(String[] args) {
         configureInjection();
-    
+
         // CRIANDO EMPREGADOS
         Empregado empregado1 = new Empregado("felpsd", "çlkjh");
         Administrador adm1 = new Administrador("adm", "123");
@@ -34,7 +41,7 @@ public class Main {
 
         // LISTANDO EMPREGADOS
         findEmpregadoUseCase.findAll().forEach(empregado -> System.out.println("usuario = " + empregado));
-        
+
         // AUTENTICANDO EMPREGADOS (LOGAR E DESLOGAR)
         try {
             loginEmpregadoUseCase.logar(empregado1.getUsername(), empregado1.getSenha());
@@ -52,7 +59,13 @@ public class Main {
         
         // LISTANDO TANQUES
         findTanqueUseCase.findAll().forEach(tanque -> System.out.println("tanque = " + tanque));
-        
+
+        // CRIANDO FORNECEDORES
+        Fornecedor fornecedor1 = new Fornecedor("FORNE");
+        createFornecedorUseCase.insert(fornecedor1);
+
+        // LISTANDO FORNECEDORES
+        findFornecedorUseCase.findAll().forEach(fornecedor -> System.out.println("fornecedor = " + fornecedor));
     }
 
     private static void configureInjection() {
@@ -69,5 +82,10 @@ public class Main {
         removeTanqueUseCase = new RemoveTanqueUseCase(tanqueDAO);
         findTanqueUseCase = new FindTanqueUseCase(tanqueDAO);
 
+        FornecedorDAO fornecedorDAO = new InMemoryFornecedorDAO();
+        createFornecedorUseCase = new CreateFornecedorUseCase(fornecedorDAO);
+        updateFornecedorUseCase = new UpdateFornecedorUseCase(fornecedorDAO);
+        removeFornecedorUseCase = new RemoveFornecedorUseCase(fornecedorDAO);
+        findFornecedorUseCase = new FindFornecedorUseCase(fornecedorDAO);
     }
 }

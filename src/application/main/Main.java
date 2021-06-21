@@ -4,6 +4,7 @@ import application.repository.*;
 import domain.entities.Cliente.Cliente;
 import domain.entities.Estoque.Estoque;
 import domain.entities.Fornecedor.Fornecedor;
+import domain.entities.Insumo.Insumo;
 import domain.entities.Peixe.Peixe;
 import domain.entities.Tanque.Tanque;
 import domain.entities.Usuario.Administrador;
@@ -11,6 +12,7 @@ import domain.entities.Usuario.Empregado;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
 import domain.usecases.Fornecedor.*;
+import domain.usecases.Insumo.*;
 import domain.usecases.Peixe.*;
 import domain.usecases.Tanque.*;
 import domain.usecases.Usuario.*;
@@ -48,6 +50,11 @@ public class Main {
     private static UpdateEstoqueUseCase updateEstoqueUseCase;
     private static RemoveEstoqueUseCase removeEstoqueUseCase;
     private static FindEstoqueUseCase findEstoqueUseCase;
+
+    private static CreateInsumoUseCase createInsumoUseCase;
+    private static UpdateInsumoUseCase updateInsumoUseCase;
+    private static RemoveInsumoUseCase removeInsumoUseCase;
+    private static FindInsumoUseCase findInsumoUseCase;
 
     public static void main(String[] args) {
         configureInjection();
@@ -98,9 +105,12 @@ public class Main {
         // CRIANDO ESTOQUE
         Estoque racaoTilapia = new Estoque();
         createEstoqueUseCase.insert(racaoTilapia);
-        findFornecedorUseCase.findAll().forEach(estoque -> System.out.println("estoque = " + estoque));
+        findEstoqueUseCase.findAll().forEach(estoque -> System.out.println("estoque = " + estoque));
 
-        
+        // CRIANDO INSUMO
+        Insumo racao = new Insumo();
+        createInsumoUseCase.insert(racao);
+        findInsumoUseCase.findAll().forEach(insumo -> System.out.println("insumo = " + insumo));
     }
 
     private static void configureInjection() {
@@ -140,5 +150,11 @@ public class Main {
         updateEstoqueUseCase = new UpdateEstoqueUseCase(estoqueDAO);
         removeEstoqueUseCase = new RemoveEstoqueUseCase(estoqueDAO);
         findEstoqueUseCase = new FindEstoqueUseCase(estoqueDAO);
+
+        InsumoDAO insumoDAO = new InMemoryInsumoDAO();
+        createInsumoUseCase = new CreateInsumoUseCase(insumoDAO);
+        updateInsumoUseCase = new UpdateInsumoUseCase(insumoDAO);
+        removeInsumoUseCase = new RemoveInsumoUseCase(insumoDAO);
+        findInsumoUseCase = new FindInsumoUseCase(insumoDAO);
     }
 }

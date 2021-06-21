@@ -1,14 +1,13 @@
 package application.main;
 
-import application.repository.InMemoryEmpregadoDAO;
-import application.repository.InMemoryFornecedorDAO;
-import application.repository.InMemoryPeixeDAO;
-import application.repository.InMemoryTanqueDAO;
+import application.repository.*;
+import domain.entities.Cliente.Cliente;
 import domain.entities.Fornecedor.Fornecedor;
 import domain.entities.Peixe.Peixe;
 import domain.entities.Tanque.Tanque;
 import domain.entities.Usuario.Administrador;
 import domain.entities.Usuario.Empregado;
+import domain.usecases.Cliente.*;
 import domain.usecases.Fornecedor.*;
 import domain.usecases.Peixe.*;
 import domain.usecases.Tanque.*;
@@ -33,6 +32,11 @@ public class Main {
     private static RemovePeixeUseCase removePeixeUseCase;
     private static FindPeixeUseCase findPeixeUseCase;
 
+    private static CreateClienteUseCase createClienteUseCase;
+    private static UpdateClienteUseCase updateClienteUseCase;
+    private static RemoveClienteUseCase removeClienteUseCase;
+    private static FindClienteUseCase findClienteUseCase;
+
     private static CreateFornecedorUseCase createFornecedorUseCase;
     private static UpdateFornecedorUseCase updateFornecedorUseCase;
     private static RemoveFornecedorUseCase removeFornecedorUseCase;
@@ -46,8 +50,6 @@ public class Main {
         Administrador adm1 = new Administrador("adm", "123");
         createEmpregadoUseCase.insert(empregado1);
         createEmpregadoUseCase.insert(adm1);
-
-        // LISTANDO EMPREGADOS
         findEmpregadoUseCase.findAll().forEach(empregado -> System.out.println("usuario = " + empregado));
 
         // AUTENTICANDO EMPREGADOS (LOGAR E DESLOGAR)
@@ -64,22 +66,26 @@ public class Main {
         // CRIANDO TANQUES
         Tanque tanque1 = new Tanque("tilápia");
         createTanqueUseCase.insert(tanque1);
-        
-        // LISTANDO TANQUES
         findTanqueUseCase.findAll().forEach(tanque -> System.out.println("tanque = " + tanque));
 
         // CRIANDO PEIXES
         Peixe tilapia = new Peixe("tilápia");
         createPeixeUseCase.insert(tilapia);
-
-        // LISTANDO PEIXES
         findPeixeUseCase.findAll().forEach(peixe -> System.out.println("peixe = " + peixe));
+
+        // CRIANDO CLIENTES
+        Cliente supermercado_mar = new Cliente(
+                "09.044.577/0001-90",
+                "Supermercado Mar",
+                "16992320932",
+                "supermar@mercados.com"
+        );
+        createClienteUseCase.insert(supermercado_mar);
+        findClienteUseCase.findAll().forEach(cliente -> System.out.println("cliente = " + cliente));
 
         // CRIANDO FORNECEDORES
         Fornecedor fornecedor1 = new Fornecedor("FORNE");
         createFornecedorUseCase.insert(fornecedor1);
-
-        // LISTANDO FORNECEDORES
         findFornecedorUseCase.findAll().forEach(fornecedor -> System.out.println("fornecedor = " + fornecedor));
     }
 
@@ -102,6 +108,12 @@ public class Main {
         updatePeixeUseCase = new UpdatePeixeUseCase(peixeDAO);
         removePeixeUseCase = new RemovePeixeUseCase(peixeDAO);
         findPeixeUseCase = new FindPeixeUseCase(peixeDAO);
+
+        ClienteDAO clienteDAO = new InMemoryClienteDAO();
+        createClienteUseCase = new CreateClienteUseCase(clienteDAO);
+        updateClienteUseCase = new UpdateClienteUseCase(clienteDAO);
+        removeClienteUseCase = new RemoveClienteUseCase(clienteDAO);
+        findClienteUseCase = new FindClienteUseCase(clienteDAO);
 
         FornecedorDAO fornecedorDAO = new InMemoryFornecedorDAO();
         createFornecedorUseCase = new CreateFornecedorUseCase(fornecedorDAO);

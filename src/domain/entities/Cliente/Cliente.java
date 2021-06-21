@@ -1,6 +1,7 @@
 package domain.entities.Cliente;
 
 public class Cliente {
+    private int id;
     private String cnpj;
     private String nome;
     private String telefone;
@@ -11,6 +12,14 @@ public class Cliente {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCnpj() {
@@ -43,5 +52,13 @@ public class Cliente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "cnpj='" + cnpj + '\'' +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 }

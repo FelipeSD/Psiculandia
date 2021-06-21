@@ -2,12 +2,14 @@ package application.main;
 
 import application.repository.*;
 import domain.entities.Cliente.Cliente;
+import domain.entities.Estoque.Estoque;
 import domain.entities.Fornecedor.Fornecedor;
 import domain.entities.Peixe.Peixe;
 import domain.entities.Tanque.Tanque;
 import domain.entities.Usuario.Administrador;
 import domain.entities.Usuario.Empregado;
 import domain.usecases.Cliente.*;
+import domain.usecases.Estoque.*;
 import domain.usecases.Fornecedor.*;
 import domain.usecases.Peixe.*;
 import domain.usecases.Tanque.*;
@@ -41,6 +43,11 @@ public class Main {
     private static UpdateFornecedorUseCase updateFornecedorUseCase;
     private static RemoveFornecedorUseCase removeFornecedorUseCase;
     private static FindFornecedorUseCase findFornecedorUseCase;
+
+    private static CreateEstoqueUseCase createEstoqueUseCase;
+    private static UpdateEstoqueUseCase updateEstoqueUseCase;
+    private static RemoveEstoqueUseCase removeEstoqueUseCase;
+    private static FindEstoqueUseCase findEstoqueUseCase;
 
     public static void main(String[] args) {
         configureInjection();
@@ -87,6 +94,13 @@ public class Main {
         Fornecedor fornecedor1 = new Fornecedor("FORNE");
         createFornecedorUseCase.insert(fornecedor1);
         findFornecedorUseCase.findAll().forEach(fornecedor -> System.out.println("fornecedor = " + fornecedor));
+
+        // CRIANDO ESTOQUE
+        Estoque racaoTilapia = new Estoque();
+        createEstoqueUseCase.insert(racaoTilapia);
+        findFornecedorUseCase.findAll().forEach(estoque -> System.out.println("estoque = " + estoque));
+
+        
     }
 
     private static void configureInjection() {
@@ -120,5 +134,11 @@ public class Main {
         updateFornecedorUseCase = new UpdateFornecedorUseCase(fornecedorDAO);
         removeFornecedorUseCase = new RemoveFornecedorUseCase(fornecedorDAO);
         findFornecedorUseCase = new FindFornecedorUseCase(fornecedorDAO);
+
+        EstoqueDAO estoqueDAO = new InMemoryEstoqueDAO();
+        createEstoqueUseCase = new CreateEstoqueUseCase(estoqueDAO);
+        updateEstoqueUseCase = new UpdateEstoqueUseCase(estoqueDAO);
+        removeEstoqueUseCase = new RemoveEstoqueUseCase(estoqueDAO);
+        findEstoqueUseCase = new FindEstoqueUseCase(estoqueDAO);
     }
 }

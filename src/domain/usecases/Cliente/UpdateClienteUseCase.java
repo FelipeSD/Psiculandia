@@ -13,7 +13,7 @@ public class UpdateClienteUseCase {
     public boolean update(Cliente cliente){
         int id = cliente.getId();
         if(clienteDAO.findOne(id).isEmpty()){
-            throw new EntityNotFoundException("Tanque não encontrado.");
+            throw new EntityNotFoundException("Cliente não encontrado.");
         }
 
         clienteDAO.update(cliente);

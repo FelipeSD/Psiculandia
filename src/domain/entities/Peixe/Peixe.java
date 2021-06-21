@@ -8,6 +8,10 @@ public class Peixe {
     private double qtdRacaoDiaria;
     private double valorMercado;
 
+    public Peixe(String nome) {
+        this.nome = nome;
+    }
+
     public int getId() {
         return id;
     }
@@ -54,5 +58,12 @@ public class Peixe {
 
     public void setValorMercado(double valorMercado) {
         this.valorMercado = valorMercado;
+    }
+
+    @Override
+    public String toString() {
+        return "Peixe{" +
+                "nome='" + nome + '\'' +
+                '}';
     }
 }

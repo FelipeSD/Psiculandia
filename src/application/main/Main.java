@@ -2,12 +2,15 @@ package application.main;
 
 import application.repository.InMemoryEmpregadoDAO;
 import application.repository.InMemoryFornecedorDAO;
+import application.repository.InMemoryPeixeDAO;
 import application.repository.InMemoryTanqueDAO;
 import domain.entities.Fornecedor.Fornecedor;
+import domain.entities.Peixe.Peixe;
 import domain.entities.Tanque.Tanque;
 import domain.entities.Usuario.Administrador;
 import domain.entities.Usuario.Empregado;
 import domain.usecases.Fornecedor.*;
+import domain.usecases.Peixe.*;
 import domain.usecases.Tanque.*;
 import domain.usecases.Usuario.*;
 import domain.utils.InvalidPasswordException;
@@ -24,6 +27,11 @@ public class Main {
     private static UpdateTanqueUseCase updateTanqueUseCase;
     private static RemoveTanqueUseCase removeTanqueUseCase;
     private static FindTanqueUseCase findTanqueUseCase;
+
+    private static CreatePeixeUseCase createPeixeUseCase;
+    private static UpdatePeixeUseCase updatePeixeUseCase;
+    private static RemovePeixeUseCase removePeixeUseCase;
+    private static FindPeixeUseCase findPeixeUseCase;
 
     private static CreateFornecedorUseCase createFornecedorUseCase;
     private static UpdateFornecedorUseCase updateFornecedorUseCase;
@@ -60,6 +68,13 @@ public class Main {
         // LISTANDO TANQUES
         findTanqueUseCase.findAll().forEach(tanque -> System.out.println("tanque = " + tanque));
 
+        // CRIANDO PEIXES
+        Peixe tilapia = new Peixe("tilápia");
+        createPeixeUseCase.insert(tilapia);
+
+        // LISTANDO PEIXES
+        findPeixeUseCase.findAll().forEach(peixe -> System.out.println("peixe = " + peixe));
+
         // CRIANDO FORNECEDORES
         Fornecedor fornecedor1 = new Fornecedor("FORNE");
         createFornecedorUseCase.insert(fornecedor1);
@@ -81,6 +96,12 @@ public class Main {
         updateTanqueUseCase = new UpdateTanqueUseCase(tanqueDAO);
         removeTanqueUseCase = new RemoveTanqueUseCase(tanqueDAO);
         findTanqueUseCase = new FindTanqueUseCase(tanqueDAO);
+
+        PeixeDAO peixeDAO = new InMemoryPeixeDAO();
+        createPeixeUseCase = new CreatePeixeUseCase(peixeDAO);
+        updatePeixeUseCase = new UpdatePeixeUseCase(peixeDAO);
+        removePeixeUseCase = new RemovePeixeUseCase(peixeDAO);
+        findPeixeUseCase = new FindPeixeUseCase(peixeDAO);
 
         FornecedorDAO fornecedorDAO = new InMemoryFornecedorDAO();
         createFornecedorUseCase = new CreateFornecedorUseCase(fornecedorDAO);

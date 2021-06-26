@@ -1,15 +1,17 @@
 package domain.entities.Tanque;
 
+import java.util.ArrayList;
+
 public class Tanque {
     private int id; // número de identificação
     private String especieCriada;
     private int qtdAlevinos;
     private double precoManutencao;
-    private double pesoMedioPeixe;
+    // private double pesoMedioPeixe; // o peso médio do peixe é alterado semanalmente para identificar o crescimento (foi criado uma outra classe)
     private String dataInicio;
     private String dataFim;
     private boolean checkAlimentado;
-    private double[] historicoSemanal;
+    private ArrayList<HistoricoSemanalCrescimento> historicoSemanalCrescimento = new ArrayList<HistoricoSemanalCrescimento>();
 
     public Tanque() {
     }
@@ -50,14 +52,6 @@ public class Tanque {
         this.precoManutencao = precoManutencao;
     }
 
-    public double getPesoMedioPeixe() {
-        return pesoMedioPeixe;
-    }
-
-    public void setPesoMedioPeixe(double pesoMedioPeixe) {
-        this.pesoMedioPeixe = pesoMedioPeixe;
-    }
-
     public String getDataInicio() {
         return dataInicio;
     }
@@ -82,12 +76,12 @@ public class Tanque {
         this.checkAlimentado = checkAlimentado;
     }
 
-    public double[] getHistoricoSemanal() {
-        return historicoSemanal;
+    public ArrayList<HistoricoSemanalCrescimento> getHistoricoSemanal() {
+        return historicoSemanalCrescimento;
     }
 
-    public void setHistoricoSemanal(double[] historicoSemanal) {
-        this.historicoSemanal = historicoSemanal;
+    public void setHistoricoSemanal(HistoricoSemanalCrescimento historicoSemanal) {
+        this.historicoSemanalCrescimento.add(historicoSemanal);
     }
 
     @Override

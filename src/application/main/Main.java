@@ -6,12 +6,14 @@ import domain.entities.Estoque.Estoque;
 import domain.entities.Fornecedor.Fornecedor;
 import domain.entities.Insumo.Insumo;
 import domain.entities.Peixe.Peixe;
+import domain.entities.Tanque.HistoricoSemanalCrescimento;
 import domain.entities.Tanque.Tanque;
 import domain.entities.Usuario.Administrador;
 import domain.entities.Usuario.Empregado;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
 import domain.usecases.Fornecedor.*;
+import domain.usecases.HistoricoSemanalCrescimento.RegistrarCrescimentoEspecie;
 import domain.usecases.Insumo.*;
 import domain.usecases.Peixe.*;
 import domain.usecases.Tanque.*;
@@ -30,6 +32,7 @@ public class Main {
     private static UpdateTanqueUseCase updateTanqueUseCase;
     private static RemoveTanqueUseCase removeTanqueUseCase;
     private static FindTanqueUseCase findTanqueUseCase;
+    private static RegistrarCrescimentoEspecie registrarCrescimentoEspecie;
 
     private static CreatePeixeUseCase createPeixeUseCase;
     private static UpdatePeixeUseCase updatePeixeUseCase;
@@ -79,12 +82,16 @@ public class Main {
 
         // CRIANDO TANQUES
         Tanque tanque1 = new Tanque("tilápia");
+        Tanque tanque2 = new Tanque("atum");
         createTanqueUseCase.insert(tanque1);
+        createTanqueUseCase.insert(tanque2);
         findTanqueUseCase.findAll().forEach(tanque -> System.out.println("tanque = " + tanque));
 
         // CRIANDO PEIXES
         Peixe tilapia = new Peixe("tilápia");
+        Peixe atum = new Peixe("atum");
         createPeixeUseCase.insert(tilapia);
+        createPeixeUseCase.insert(atum);
         findPeixeUseCase.findAll().forEach(peixe -> System.out.println("peixe = " + peixe));
 
         // CRIANDO CLIENTES
@@ -111,6 +118,18 @@ public class Main {
         Insumo racao = new Insumo();
         createInsumoUseCase.insert(racao);
         findInsumoUseCase.findAll().forEach(insumo -> System.out.println("insumo = " + insumo));
+        
+        // REGISTRANDO CRESCIMENTO SEMANAL DE ESPÉCIE
+        registrarCrescimentoEspecie.registrar(tanque1, 290);
+        registrarCrescimentoEspecie.registrar(tanque2, 100);
+        findTanqueUseCase.findAll().forEach(tanque -> {
+            System.out.println("Historico do tanque: " + tanque.getEspecieCriada());
+            for(HistoricoSemanalCrescimento historico : tanque.getHistoricoSemanal()){
+                System.out.println("historico.getDataLancada = " + historico.getDataLancada());
+                System.out.println("historico.getPesoMedio() = " + historico.getPesoMedio());
+            }
+        });
+
     }
 
     private static void configureInjection() {
@@ -126,6 +145,8 @@ public class Main {
         updateTanqueUseCase = new UpdateTanqueUseCase(tanqueDAO);
         removeTanqueUseCase = new RemoveTanqueUseCase(tanqueDAO);
         findTanqueUseCase = new FindTanqueUseCase(tanqueDAO);
+        //relacionados
+        registrarCrescimentoEspecie = new RegistrarCrescimentoEspecie(tanqueDAO);
 
         PeixeDAO peixeDAO = new InMemoryPeixeDAO();
         createPeixeUseCase = new CreatePeixeUseCase(peixeDAO);

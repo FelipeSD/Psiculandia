@@ -13,7 +13,7 @@ import domain.entities.Usuario.Empregado;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
 import domain.usecases.Fornecedor.*;
-import domain.usecases.HistoricoSemanalCrescimento.RegistrarCrescimentoEspecie;
+import domain.usecases.HistoricoSemanalCrescimento.RegistrarCrescimentoEspecieUseCase;
 import domain.usecases.Insumo.*;
 import domain.usecases.Peixe.*;
 import domain.usecases.Tanque.*;
@@ -32,7 +32,7 @@ public class Main {
     private static UpdateTanqueUseCase updateTanqueUseCase;
     private static RemoveTanqueUseCase removeTanqueUseCase;
     private static FindTanqueUseCase findTanqueUseCase;
-    private static RegistrarCrescimentoEspecie registrarCrescimentoEspecie;
+    private static RegistrarCrescimentoEspecieUseCase registrarCrescimentoEspecieUseCase;
 
     private static CreatePeixeUseCase createPeixeUseCase;
     private static UpdatePeixeUseCase updatePeixeUseCase;
@@ -110,9 +110,10 @@ public class Main {
         findFornecedorUseCase.findAll().forEach(fornecedor -> System.out.println("fornecedor = " + fornecedor));
 
         // CRIANDO ESTOQUE
-        Estoque racaoTilapia = new Estoque();
-        createEstoqueUseCase.insert(racaoTilapia);
-        findEstoqueUseCase.findAll().forEach(estoque -> System.out.println("estoque = " + estoque));
+        Estoque estoque = new Estoque();
+        createEstoqueUseCase.insert(estoque);
+        findEstoqueUseCase.findAll().forEach(estoqueItem -> System.out.println("estoque = " + estoqueItem));
+
 
         // CRIANDO INSUMO
         Insumo racao = new Insumo();
@@ -120,8 +121,8 @@ public class Main {
         findInsumoUseCase.findAll().forEach(insumo -> System.out.println("insumo = " + insumo));
         
         // REGISTRANDO CRESCIMENTO SEMANAL DE ESPÉCIE
-        registrarCrescimentoEspecie.registrar(tanque1, 290);
-        registrarCrescimentoEspecie.registrar(tanque2, 100);
+        registrarCrescimentoEspecieUseCase.registrar(tanque1, 290);
+        registrarCrescimentoEspecieUseCase.registrar(tanque2, 100);
         findTanqueUseCase.findAll().forEach(tanque -> {
             System.out.println("Historico do tanque: " + tanque.getEspecieCriada());
             for(HistoricoSemanalCrescimento historico : tanque.getHistoricoSemanal()){
@@ -146,7 +147,7 @@ public class Main {
         removeTanqueUseCase = new RemoveTanqueUseCase(tanqueDAO);
         findTanqueUseCase = new FindTanqueUseCase(tanqueDAO);
         //relacionados
-        registrarCrescimentoEspecie = new RegistrarCrescimentoEspecie(tanqueDAO);
+        registrarCrescimentoEspecieUseCase = new RegistrarCrescimentoEspecieUseCase(tanqueDAO);
 
         PeixeDAO peixeDAO = new InMemoryPeixeDAO();
         createPeixeUseCase = new CreatePeixeUseCase(peixeDAO);

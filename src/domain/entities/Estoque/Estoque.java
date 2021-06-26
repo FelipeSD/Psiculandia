@@ -2,10 +2,12 @@ package domain.entities.Estoque;
 
 import domain.entities.Insumo.Insumo;
 
+import java.util.ArrayList;
+
 public class Estoque {
     private int id;
     private String dataAtualizacao;
-    private Insumo[] insumos;
+    private ArrayList<Insumo> insumos;
 
     public int getId() {
         return id;
@@ -23,7 +25,7 @@ public class Estoque {
         this.dataAtualizacao = dataAtualizacao;
     }
 
-    public Insumo[] listarInsumos(){
+    public ArrayList<Insumo> listarInsumos(){
         return null;
     }
 }

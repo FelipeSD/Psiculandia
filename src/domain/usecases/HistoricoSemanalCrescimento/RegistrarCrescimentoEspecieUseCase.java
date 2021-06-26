@@ -11,10 +11,10 @@ import java.util.concurrent.TimeUnit;
 
 import static domain.utils.CheckDate.getDateDiff;
 
-public class RegistrarCrescimentoEspecie {
+public class RegistrarCrescimentoEspecieUseCase {
     private final TanqueDAO tanqueDAO;
 
-    public RegistrarCrescimentoEspecie(TanqueDAO tanqueDAO) {
+    public RegistrarCrescimentoEspecieUseCase(TanqueDAO tanqueDAO) {
         this.tanqueDAO = tanqueDAO;
     }
 
@@ -27,9 +27,10 @@ public class RegistrarCrescimentoEspecie {
             tanque.setHistoricoSemanal(novoHistorico);
 
             tanqueDAO.update(tanque);
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     private boolean checarPeriodoSemanal(Tanque tanque){

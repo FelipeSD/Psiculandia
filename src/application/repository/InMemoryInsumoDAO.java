@@ -1,5 +1,6 @@
 package application.repository;
 
+import domain.entities.Estoque.Estoque;
 import domain.entities.Insumo.Insumo;
 import domain.usecases.Insumo.InsumoDAO;
 

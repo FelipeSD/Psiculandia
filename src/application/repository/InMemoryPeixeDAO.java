@@ -1,6 +1,7 @@
 package application.repository;
 
 import domain.entities.Peixe.Peixe;
+import domain.entities.Usuario.Empregado;
 import domain.usecases.Peixe.PeixeDAO;
 
 import java.util.*;
@@ -21,6 +22,16 @@ public class InMemoryPeixeDAO implements PeixeDAO {
     public Optional<Peixe> findOne(Integer key) {
         if(db.containsKey(key))
             return Optional.of(db.get(key));
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Peixe> findByEspecie(String especie) {
+        for(Map.Entry<Integer, Peixe> peixe : db.entrySet()){
+            if(peixe.getValue().getNome().equals(especie)){
+                return Optional.of(db.get(peixe.getKey()));
+            }
+        }
         return Optional.empty();
     }
 

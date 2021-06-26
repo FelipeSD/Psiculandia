@@ -49,7 +49,7 @@ public class Tanque {
     }
 
     public void setPrecoManutencao(double precoManutencao) {
-        this.precoManutencao = precoManutencao;
+        this.precoManutencao += precoManutencao;
     }
 
     public String getDataInicio() {

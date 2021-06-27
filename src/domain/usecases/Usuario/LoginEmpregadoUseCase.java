@@ -14,11 +14,11 @@ public class LoginEmpregadoUseCase {
         this.empregadoDAO = empregadoDAO;
     }
 
-    public boolean logar(String username, String password) throws InvalidPasswordException {
+    public Empregado logar(String username, String password) throws InvalidPasswordException {
         Empregado empregadoValidar = new Empregado(username, password);
         UsuarioValidator validator = new UsuarioValidator();
 
-        if(!validator.validar(empregadoValidar)) return false;
+        if(!validator.validar(empregadoValidar)) return null;
 
         Optional<Empregado> empregadoEncontrado = empregadoDAO.findByUsername(empregadoValidar.getUsername());
 
@@ -28,12 +28,11 @@ public class LoginEmpregadoUseCase {
         if(!empregadoEncontrado.get().getSenha().equals(empregadoValidar.getSenha()))
             throw new InvalidPasswordException("Senha inválida");
 
-        empregadoEncontrado.get().logar();
-        return true;
+        return empregadoEncontrado.get();
     }
 
 
-    public void deslogar(Empregado empregado) {
-        empregado.deslogar();
+    public Empregado deslogar() {
+        return null;
     }
 }

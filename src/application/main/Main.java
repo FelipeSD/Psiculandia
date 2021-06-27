@@ -10,17 +10,22 @@ import domain.entities.Tanque.HistoricoSemanalCrescimento;
 import domain.entities.Tanque.Tanque;
 import domain.entities.Usuario.Administrador;
 import domain.entities.Usuario.Empregado;
+import domain.entities.Venda.Venda;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
 import domain.usecases.Fornecedor.*;
-import domain.usecases.HistoricoSemanalCrescimento.RegistrarCrescimentoEspecieUseCase;
+import domain.usecases.Tanque.RegistrarCrescimentoEspecieUseCase;
 import domain.usecases.Insumo.*;
 import domain.usecases.Peixe.*;
 import domain.usecases.Tanque.*;
 import domain.usecases.Usuario.*;
+import domain.usecases.Venda.CreateVendaUseCase;
+import domain.usecases.Venda.FindVendaUseCase;
+import domain.usecases.Venda.RemoveVendaUseCase;
+import domain.usecases.Venda.UpdateVendaUseCase;
+import domain.usecases.Venda.VendaDAO;
 import domain.utils.InvalidPasswordException;
 
-//https://github1s.com/lucas-ifsp/symploteca/blob/HEAD/src/main/java/br/edu/ifsp/application/main/Main.java
 public class Main {
     private static CreateEmpregadoUseCase createEmpregadoUseCase;
     private static UpdateEmpregadoUseCase updateEmpregadoUseCase;
@@ -33,6 +38,7 @@ public class Main {
     private static RemoveTanqueUseCase removeTanqueUseCase;
     private static FindTanqueUseCase findTanqueUseCase;
     private static RegistrarCrescimentoEspecieUseCase registrarCrescimentoEspecieUseCase;
+    private static RegistrarAdministracaoDiariaRacaoUseCase registrarAdministracaoDiariaRacaoUseCase;
 
     private static CreatePeixeUseCase createPeixeUseCase;
     private static UpdatePeixeUseCase updatePeixeUseCase;
@@ -59,6 +65,13 @@ public class Main {
     private static RemoveInsumoUseCase removeInsumoUseCase;
     private static FindInsumoUseCase findInsumoUseCase;
 
+    private static CreateVendaUseCase createVendaUseCase;
+    private static UpdateVendaUseCase updateVendaUseCase;
+    private static RemoveVendaUseCase removeVendaUseCase;
+    private static FindVendaUseCase findVendaUseCase;
+
+    private static Empregado USUARIO_Sistema;
+
     public static void main(String[] args) {
         configureInjection();
 
@@ -67,32 +80,38 @@ public class Main {
         Administrador adm1 = new Administrador("adm", "123");
         createEmpregadoUseCase.insert(empregado1);
         createEmpregadoUseCase.insert(adm1);
+        System.out.println("\n========= LISTANDO USUÁRIOS ==========");
         findEmpregadoUseCase.findAll().forEach(empregado -> System.out.println("usuario = " + empregado));
 
         // AUTENTICANDO EMPREGADOS (LOGAR E DESLOGAR)
         try {
-            loginEmpregadoUseCase.logar(empregado1.getUsername(), empregado1.getSenha());
-            System.out.println("Usuário está logado?:" + empregado1.estaLogado());
-
-            loginEmpregadoUseCase.deslogar(empregado1);
-            System.out.println("Usuário está logado?:" + empregado1.estaLogado());
+            USUARIO_Sistema = loginEmpregadoUseCase.logar(empregado1.getUsername(), empregado1.getSenha());
+            //USUARIO_Sistema = loginEmpregadoUseCase.deslogar();
         }catch (InvalidPasswordException e){
             System.out.println("e = " + e);
+            return;
         }
 
-        // CRIANDO TANQUES
-        Tanque tanque1 = new Tanque("tilápia");
-        Tanque tanque2 = new Tanque("atum");
-        createTanqueUseCase.insert(tanque1);
-        createTanqueUseCase.insert(tanque2);
-        findTanqueUseCase.findAll().forEach(tanque -> System.out.println("tanque = " + tanque));
+        if(USUARIO_Sistema == null){
+            System.out.println("Insira corretamente as credenciais para acessar o sistema.");
+            return;
+        }
 
         // CRIANDO PEIXES
         Peixe tilapia = new Peixe("tilápia");
         Peixe atum = new Peixe("atum");
         createPeixeUseCase.insert(tilapia);
         createPeixeUseCase.insert(atum);
+        System.out.println("\n========= LISTANDO PEIXES ==========");
         findPeixeUseCase.findAll().forEach(peixe -> System.out.println("peixe = " + peixe));
+
+        // CRIANDO TANQUES
+        Tanque tanque1 = new Tanque("tilápia");
+        Tanque tanque2 = new Tanque("atum");
+        createTanqueUseCase.insert(tanque1);
+        createTanqueUseCase.insert(tanque2);
+        System.out.println("\n========= LISTANDO TANQUES ==========");
+        findTanqueUseCase.findAll().forEach(tanque -> System.out.println("tanque = " + tanque));
 
         // CRIANDO CLIENTES
         Cliente supermercado_mar = new Cliente(
@@ -102,34 +121,52 @@ public class Main {
                 "supermar@mercados.com"
         );
         createClienteUseCase.insert(supermercado_mar);
+        System.out.println("\n========= LISTANDO CLIENTES ==========");
         findClienteUseCase.findAll().forEach(cliente -> System.out.println("cliente = " + cliente));
 
         // CRIANDO FORNECEDORES
         Fornecedor fornecedor1 = new Fornecedor("FORNE");
         createFornecedorUseCase.insert(fornecedor1);
+        System.out.println("\n========= LISTANDO FORNECEDORES ==========");
         findFornecedorUseCase.findAll().forEach(fornecedor -> System.out.println("fornecedor = " + fornecedor));
 
         // CRIANDO ESTOQUE
         Estoque estoque = new Estoque();
         createEstoqueUseCase.insert(estoque);
+        System.out.println("\n========= LISTANDO ESTOQUES ==========");
         findEstoqueUseCase.findAll().forEach(estoqueItem -> System.out.println("estoque = " + estoqueItem));
-
 
         // CRIANDO INSUMO
         Insumo racao = new Insumo();
         createInsumoUseCase.insert(racao);
+        System.out.println("\n========= LISTANDO INSUMOS ==========");
         findInsumoUseCase.findAll().forEach(insumo -> System.out.println("insumo = " + insumo));
+
+        // CRIANDO VENDA
+        Venda venda1 = new Venda("tilápia", 123, 600);
+        createVendaUseCase.insert(venda1);
+        System.out.println("\n========= LISTANDO VENDAS ==========");
+        findVendaUseCase.findAll().forEach(venda -> System.out.println("venda = " + venda));
         
         // REGISTRANDO CRESCIMENTO SEMANAL DE ESPÉCIE
         registrarCrescimentoEspecieUseCase.registrar(tanque1, 290);
+        try {
+            Thread.sleep(1000);
+            registrarCrescimentoEspecieUseCase.registrar(tanque1, 300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         registrarCrescimentoEspecieUseCase.registrar(tanque2, 100);
+        System.out.println("\n========= LISTANDO HISTORICO DE CRESCIMENTO ==========");
         findTanqueUseCase.findAll().forEach(tanque -> {
-            System.out.println("Historico do tanque: " + tanque.getEspecieCriada());
+            System.out.println("\n\t***Historico do tanque: " + tanque.getEspecieCriada() + "***");
             for(HistoricoSemanalCrescimento historico : tanque.getHistoricoSemanal()){
                 System.out.println("historico.getDataLancada = " + historico.getDataLancada());
                 System.out.println("historico.getPesoMedio() = " + historico.getPesoMedio());
             }
         });
+
+        registrarAdministracaoDiariaRacaoUseCase.administrarRacao(tanque1, estoque);
 
     }
 
@@ -148,6 +185,7 @@ public class Main {
         findTanqueUseCase = new FindTanqueUseCase(tanqueDAO);
         //relacionados
         registrarCrescimentoEspecieUseCase = new RegistrarCrescimentoEspecieUseCase(tanqueDAO);
+        registrarAdministracaoDiariaRacaoUseCase = new RegistrarAdministracaoDiariaRacaoUseCase(tanqueDAO);
 
         PeixeDAO peixeDAO = new InMemoryPeixeDAO();
         createPeixeUseCase = new CreatePeixeUseCase(peixeDAO);
@@ -178,5 +216,11 @@ public class Main {
         updateInsumoUseCase = new UpdateInsumoUseCase(insumoDAO);
         removeInsumoUseCase = new RemoveInsumoUseCase(insumoDAO);
         findInsumoUseCase = new FindInsumoUseCase(insumoDAO);
+
+        VendaDAO vendaDAO = new InMemoryVendaDAO();
+        createVendaUseCase = new CreateVendaUseCase(vendaDAO);
+        updateVendaUseCase = new UpdateVendaUseCase(vendaDAO);
+        removeVendaUseCase = new RemoveVendaUseCase(vendaDAO);
+        findVendaUseCase = new FindVendaUseCase(vendaDAO);
     }
 }

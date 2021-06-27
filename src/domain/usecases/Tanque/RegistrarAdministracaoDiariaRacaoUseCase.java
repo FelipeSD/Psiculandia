@@ -5,7 +5,6 @@ import domain.entities.Estoque.Estoque;
 import domain.entities.Insumo.Insumo;
 import domain.entities.Peixe.Peixe;
 import domain.entities.Tanque.Tanque;
-import domain.usecases.Estoque.EstoqueDAO;
 import domain.usecases.Peixe.PeixeDAO;
 import domain.utils.EntityNotFoundException;
 
@@ -39,18 +38,21 @@ public class RegistrarAdministracaoDiariaRacaoUseCase {
         double qtdeRacao = peixeEncontrado.getQtdRacaoDiaria();
 
         ArrayList<Insumo> listaInsumos = estoque.listarInsumos();
-        for(Insumo insumoEstoque : listaInsumos){
-            if(insumoEstoque.getNome().equals(racao)){
-                double valorInsumo = insumoEstoque.getValor();
-                double qtde = quantidadePeixe*qtdeRacao;
-                double resultado = insumoEstoque.getQtde() - qtde;
 
-                double valorTotal = valorInsumo * qtde;
-                tanque.setPrecoManutencao(valorTotal);
+        if(!listaInsumos.isEmpty()){
+            for(Insumo insumoEstoque : listaInsumos){
+                if(insumoEstoque.getNome().equals(racao)){
+                    double valorInsumo = insumoEstoque.getValor();
+                    double qtde = quantidadePeixe*qtdeRacao;
+                    double resultado = insumoEstoque.getQtde() - qtde;
 
-                insumoEstoque.setQtde(resultado);
-                tanque.setCheckAlimentado(true);
-                break;
+                    double valorTotal = valorInsumo * qtde;
+                    tanque.setPrecoManutencao(valorTotal);
+
+                    insumoEstoque.setQtde(resultado);
+                    tanque.setCheckAlimentado(true);
+                    break;
+                }
             }
         }
 

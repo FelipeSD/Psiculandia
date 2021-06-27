@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Estoque {
     private int id;
     private String dataAtualizacao;
-    private ArrayList<Insumo> insumos;
+    private ArrayList<Insumo> insumos = new ArrayList<Insumo>();
 
     public int getId() {
         return id;
@@ -26,6 +26,6 @@ public class Estoque {
     }
 
     public ArrayList<Insumo> listarInsumos(){
-        return null;
+        return insumos;
     }
 }

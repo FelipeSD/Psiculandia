@@ -44,9 +44,11 @@ public class PrevisaoVendaPeixeUseCase {
 
         double pesoIdealTanque = pesoIdealVenda*quantidadePeixe;
 
-        double pesoFaltante = pesoIdealTanque-pesoAtual;
+        double pesoFaltante = pesoAtual-pesoIdealTanque;
 
         double semanasFaltantes = pesoFaltante/pesoMedioSemanal;
+
+        System.out.println("Os peixes do tanque poderão ser vendidos daqui a " + semanasFaltantes +" semanas.");
 
         return semanasFaltantes;
     }

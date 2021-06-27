@@ -39,6 +39,7 @@ public class Main {
     private static FindTanqueUseCase findTanqueUseCase;
     private static RegistrarCrescimentoEspecieUseCase registrarCrescimentoEspecieUseCase;
     private static RegistrarAdministracaoDiariaRacaoUseCase registrarAdministracaoDiariaRacaoUseCase;
+    private static PrevisaoVendaPeixeUseCase previsaoVendaPeixeUseCase;
 
     private static CreatePeixeUseCase createPeixeUseCase;
     private static UpdatePeixeUseCase updatePeixeUseCase;
@@ -147,11 +148,12 @@ public class Main {
         createVendaUseCase.insert(venda1);
         System.out.println("\n========= LISTANDO VENDAS ==========");
         findVendaUseCase.findAll().forEach(venda -> System.out.println("venda = " + venda));
-        
+        System.out.println("\n");
+
         // REGISTRANDO CRESCIMENTO SEMANAL DE ESPÉCIE
         registrarCrescimentoEspecieUseCase.registrar(tanque1, 290);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(2000);
             registrarCrescimentoEspecieUseCase.registrar(tanque1, 300);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -167,7 +169,7 @@ public class Main {
         });
 
         registrarAdministracaoDiariaRacaoUseCase.administrarRacao(tanque1, estoque);
-
+        previsaoVendaPeixeUseCase.preveVenda(tanque1);
     }
 
     private static void configureInjection() {
@@ -178,6 +180,12 @@ public class Main {
         findEmpregadoUseCase = new FindEmpregadoUseCase(empregadoDAO);
         loginEmpregadoUseCase = new LoginEmpregadoUseCase(empregadoDAO);
 
+        PeixeDAO peixeDAO = new InMemoryPeixeDAO();
+        createPeixeUseCase = new CreatePeixeUseCase(peixeDAO);
+        updatePeixeUseCase = new UpdatePeixeUseCase(peixeDAO);
+        removePeixeUseCase = new RemovePeixeUseCase(peixeDAO);
+        findPeixeUseCase = new FindPeixeUseCase(peixeDAO);
+
         TanqueDAO tanqueDAO = new InMemoryTanqueDAO();
         createTanqueUseCase = new CreateTanqueUseCase(tanqueDAO);
         updateTanqueUseCase = new UpdateTanqueUseCase(tanqueDAO);
@@ -186,12 +194,7 @@ public class Main {
         //relacionados
         registrarCrescimentoEspecieUseCase = new RegistrarCrescimentoEspecieUseCase(tanqueDAO);
         registrarAdministracaoDiariaRacaoUseCase = new RegistrarAdministracaoDiariaRacaoUseCase(tanqueDAO);
-
-        PeixeDAO peixeDAO = new InMemoryPeixeDAO();
-        createPeixeUseCase = new CreatePeixeUseCase(peixeDAO);
-        updatePeixeUseCase = new UpdatePeixeUseCase(peixeDAO);
-        removePeixeUseCase = new RemovePeixeUseCase(peixeDAO);
-        findPeixeUseCase = new FindPeixeUseCase(peixeDAO);
+        previsaoVendaPeixeUseCase = new PrevisaoVendaPeixeUseCase(tanqueDAO, peixeDAO);
 
         ClienteDAO clienteDAO = new InMemoryClienteDAO();
         createClienteUseCase = new CreateClienteUseCase(clienteDAO);

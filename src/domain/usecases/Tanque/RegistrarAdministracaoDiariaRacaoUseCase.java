@@ -44,14 +44,14 @@ public class RegistrarAdministracaoDiariaRacaoUseCase {
                 if(insumoEstoque.getNome().equals(racao)){
                     double valorInsumo = insumoEstoque.getValor();
                     double qtde = quantidadePeixe*qtdeRacao;
-                    double resultado = insumoEstoque.getQtde() - qtde;
+                    double quantidadeFinal = insumoEstoque.getQtde() - qtde;
 
                     double valorTotal = valorInsumo * qtde;
                     tanque.setPrecoManutencao(valorTotal);
 
-                    insumoEstoque.setQtde(resultado);
+                    insumoEstoque.setQtde(quantidadeFinal);
                     tanque.setCheckAlimentado(true);
-                    break;
+                    return true;
                 }
             }
         }

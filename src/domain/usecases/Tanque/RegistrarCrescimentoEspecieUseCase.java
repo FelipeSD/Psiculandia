@@ -1,8 +1,7 @@
-package domain.usecases.HistoricoSemanalCrescimento;
+package domain.usecases.Tanque;
 
 import domain.entities.Tanque.HistoricoSemanalCrescimento;
 import domain.entities.Tanque.Tanque;
-import domain.usecases.Tanque.TanqueDAO;
 import domain.utils.EntityNotFoundException;
 
 import java.util.ArrayList;
@@ -22,13 +21,13 @@ public class RegistrarCrescimentoEspecieUseCase {
        if(tanqueDAO.findOne(tanque.getId()).isEmpty())
             throw new EntityNotFoundException("Tanque não foi encontrado.");
 
-        if(checarPeriodoSemanal(tanque)){
-            HistoricoSemanalCrescimento novoHistorico = new HistoricoSemanalCrescimento(pesoMedio);
-            tanque.setHistoricoSemanal(novoHistorico);
+       if(checarPeriodoSemanal(tanque)){
+           HistoricoSemanalCrescimento novoHistorico = new HistoricoSemanalCrescimento(pesoMedio);
+           tanque.setHistoricoSemanal(novoHistorico);
 
-            tanqueDAO.update(tanque);
-            return true;
-        }
+           tanqueDAO.update(tanque);
+           return true;
+       }
 
         return false;
     }
@@ -43,12 +42,21 @@ public class RegistrarCrescimentoEspecieUseCase {
         Date ultimaDataLancada = ultimoHistorico.getDataLancada();
         Date dataHoje =  new Date();
 
-        long daysBetween = getDateDiff(ultimaDataLancada, dataHoje, TimeUnit.DAYS);
-        if(daysBetween < 7){
+//        long daysBetween = getDateDiff(ultimaDataLancada, dataHoje, TimeUnit.DAYS);
+//        if(daysBetween < 7){
+//            long diasParaNovoRegistro = 7 - daysBetween;
+//            System.out.println("Retorne daqui a " + diasParaNovoRegistro + " dias para registrar um novo histórico");
+//            return false;
+//        }
+
+        // PARA TESTE INSTANTÂNEO - (REMOVER)
+        long daysBetween = getDateDiff(ultimaDataLancada, dataHoje, TimeUnit.MILLISECONDS);
+        if(daysBetween < 900){
             long diasParaNovoRegistro = 7 - daysBetween;
-            System.out.println("Retorne daqui à " + diasParaNovoRegistro + " dias para registrar um novo histórico");
+            System.out.println("Retorne daqui a " + diasParaNovoRegistro + " dias para registrar um novo histórico");
             return false;
         }
+
         return true;
     }
 

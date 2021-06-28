@@ -1,5 +1,7 @@
 package domain.entities.Insumo;
 
+import domain.entities.Fornecedor.Fornecedor;
+
 public class Insumo {
     private int id;
     private String nome;
@@ -7,6 +9,7 @@ public class Insumo {
     private double qtde;
     private double valor;
     private String dataAquisicao;
+    private Fornecedor fornecedor;
 
     public int getId() {
         return id;
@@ -38,6 +41,14 @@ public class Insumo {
 
     public void setQtde(double qtde) {
         this.qtde = qtde;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
     public double getValor() {

@@ -65,6 +65,7 @@ public class Main {
     private static UpdateInsumoUseCase updateInsumoUseCase;
     private static RemoveInsumoUseCase removeInsumoUseCase;
     private static FindInsumoUseCase findInsumoUseCase;
+    private static PrevisaoRepoeEstoqueUseCase previsaoRepoeEstoqueUseCase;
 
     private static CreateVendaUseCase createVendaUseCase;
     private static UpdateVendaUseCase updateVendaUseCase;
@@ -170,6 +171,8 @@ public class Main {
 
         registrarAdministracaoDiariaRacaoUseCase.administrarRacao(tanque1, estoque);
         previsaoVendaPeixeUseCase.preveVenda(tanque1);
+        previsaoRepoeEstoqueUseCase.preveReposicao(tanque1, estoque);
+
     }
 
     private static void configureInjection() {
@@ -219,6 +222,7 @@ public class Main {
         updateInsumoUseCase = new UpdateInsumoUseCase(insumoDAO);
         removeInsumoUseCase = new RemoveInsumoUseCase(insumoDAO);
         findInsumoUseCase = new FindInsumoUseCase(insumoDAO);
+        previsaoRepoeEstoqueUseCase = new PrevisaoRepoeEstoqueUseCase(peixeDAO, tanqueDAO);
 
         VendaDAO vendaDAO = new InMemoryVendaDAO();
         createVendaUseCase = new CreateVendaUseCase(vendaDAO);

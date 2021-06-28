@@ -6,7 +6,7 @@ public class Fornecedor {
     private String nome;
     private String enedereco;
     private String[] produtos;
-    private String tempoEntrega;
+    private int tempoEntrega;
 
     public Fornecedor() {
     }
@@ -55,11 +55,11 @@ public class Fornecedor {
         this.produtos = produtos;
     }
 
-    public String getTempoEntrega() {
+    public int getTempoEntrega() {
         return tempoEntrega;
     }
 
-    public void setTempoEntrega(String tempoEntrega) {
+    public void setTempoEntrega(int tempoEntrega) {
         this.tempoEntrega = tempoEntrega;
     }
 

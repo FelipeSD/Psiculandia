@@ -44,7 +44,7 @@ public class PrevisaoVendaPeixeUseCase {
 
         double pesoIdealTanque = pesoIdealVenda*quantidadePeixe;
 
-        double pesoFaltante = pesoAtual-pesoIdealTanque;
+        double pesoFaltante = pesoIdealTanque-pesoAtual;
 
         double semanasFaltantes = pesoFaltante/pesoMedioSemanal;
 

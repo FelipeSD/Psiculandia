@@ -46,6 +46,8 @@ public class RegistrarAdministracaoDiariaRacaoUseCase {
                     double qtde = quantidadePeixe*qtdeRacao;
                     double quantidadeFinal = insumoEstoque.getQtde() - qtde;
 
+                    // e se a quantidade final do estoque for negativa? Não irá alimentar todos os peixes (tratar)
+
                     double valorTotal = valorInsumo * qtde;
                     tanque.setPrecoManutencao(valorTotal);
 

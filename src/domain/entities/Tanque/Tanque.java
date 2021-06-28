@@ -16,8 +16,9 @@ public class Tanque {
     public Tanque() {
     }
 
-    public Tanque(String especieCriada) {
+     public Tanque(String especieCriada, int qtdAlevinos) {
         this.especieCriada = especieCriada;
+        this.qtdAlevinos = qtdAlevinos;
     }
 
     public int getId() {

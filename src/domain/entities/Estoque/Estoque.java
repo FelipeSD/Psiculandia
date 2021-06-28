@@ -26,6 +26,26 @@ public class Estoque {
     }
 
     public ArrayList<Insumo> listarInsumos(){
-        return insumos;
+        return this.insumos;
+    }
+
+    public void adicionarInsumo(Insumo insumo){
+        this.insumos.add(insumo);
+    }
+
+    public boolean atualizarInsumo(Insumo insumo){
+        for(Insumo insumoEstoque : this.insumos){
+            if(insumoEstoque.getId() == insumo.getId()){
+                int index = this.insumos.indexOf(insumoEstoque);
+                this.insumos.set(index, insumo);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void removerInsumo(Insumo insumo) {
+        this.insumos.removeIf(insumoEstoque -> insumoEstoque.getId() == insumo.getId());
     }
 }

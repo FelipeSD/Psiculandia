@@ -8,8 +8,12 @@ public class Peixe {
     private double qtdRacaoDiaria;
     private double valorMercado;
 
-    public Peixe(String nome) {
+    public Peixe(String nome, double pesoIdealVenda, String racaoConsumida, double qtdRacaoDiaria, double valorMercado) {
         this.nome = nome;
+        this.pesoIdealVenda = pesoIdealVenda;
+        this.racaoConsumida = racaoConsumida;
+        this.qtdRacaoDiaria = qtdRacaoDiaria;
+        this.valorMercado = valorMercado;
     }
 
     public int getId() {

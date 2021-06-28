@@ -11,6 +11,13 @@ public class Insumo {
     private String dataAquisicao;
     private Fornecedor fornecedor;
 
+    public Insumo(String nome, double qtde, double valor, Fornecedor fornecedor) {
+        this.nome = nome;
+        this.qtde = qtde;
+        this.valor = valor;
+        this.fornecedor = fornecedor;
+    }
+
     public int getId() {
         return id;
     }
@@ -65,5 +72,15 @@ public class Insumo {
 
     public void setDataAquisicao(String dataAquisicao) {
         this.dataAquisicao = dataAquisicao;
+    }
+
+    @Override
+    public String toString() {
+        return "Insumo{" +
+                "nome='" + nome + '\'' +
+                ", qtde=" + qtde +
+                ", valor=" + valor +
+                ", fornecedor=" + fornecedor.getNome() +
+                '}';
     }
 }

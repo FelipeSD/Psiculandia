@@ -100,16 +100,16 @@ public class Main {
         }
 
         // CRIANDO PEIXES
-        Peixe tilapia = new Peixe("tilápia");
-        Peixe atum = new Peixe("atum");
+        Peixe tilapia = new Peixe("tilápia", 200, "Ração Tilápia", 4, 20);
+        Peixe atum = new Peixe("atum", 100, "Ração Atum", 6, 10);
         createPeixeUseCase.insert(tilapia);
         createPeixeUseCase.insert(atum);
         System.out.println("\n========= LISTANDO PEIXES ==========");
         findPeixeUseCase.findAll().forEach(peixe -> System.out.println("peixe = " + peixe));
 
         // CRIANDO TANQUES
-        Tanque tanque1 = new Tanque("tilápia");
-        Tanque tanque2 = new Tanque("atum");
+        Tanque tanque1 = new Tanque("tilápia", 20);
+        Tanque tanque2 = new Tanque("atum", 10);
         createTanqueUseCase.insert(tanque1);
         createTanqueUseCase.insert(tanque2);
         System.out.println("\n========= LISTANDO TANQUES ==========");
@@ -135,14 +135,16 @@ public class Main {
         // CRIANDO ESTOQUE
         Estoque estoque = new Estoque();
         createEstoqueUseCase.insert(estoque);
-        System.out.println("\n========= LISTANDO ESTOQUES ==========");
-        findEstoqueUseCase.findAll().forEach(estoqueItem -> System.out.println("estoque = " + estoqueItem));
 
         // CRIANDO INSUMO
-        Insumo racao = new Insumo();
-        createInsumoUseCase.insert(racao);
-        System.out.println("\n========= LISTANDO INSUMOS ==========");
-        findInsumoUseCase.findAll().forEach(insumo -> System.out.println("insumo = " + insumo));
+        Insumo racao = new Insumo("Ração Tilápia", 160, 80, fornecedor1);
+        createInsumoUseCase.insert(racao, estoque);
+        System.out.println("\n========= LISTANDO INSUMOS ESTOQUE ==========");
+        findEstoqueUseCase.findAll().forEach(estoqueItem -> {
+            for(Insumo insumo : estoqueItem.listarInsumos()){
+                System.out.println("insumo = " + insumo);
+            }
+        });
 
         // CRIANDO VENDA
         Venda venda1 = new Venda("tilápia", 123, 600);
@@ -170,6 +172,7 @@ public class Main {
         });
 
         registrarAdministracaoDiariaRacaoUseCase.administrarRacao(tanque1, estoque);
+        // registrarAdministracaoDiariaRacaoUseCase.administrarRacao(tanque1, estoque);
         previsaoVendaPeixeUseCase.preveVenda(tanque1);
         previsaoRepoeEstoqueUseCase.preveReposicao(tanque1, estoque);
 
@@ -218,10 +221,10 @@ public class Main {
         findEstoqueUseCase = new FindEstoqueUseCase(estoqueDAO);
 
         InsumoDAO insumoDAO = new InMemoryInsumoDAO();
-        createInsumoUseCase = new CreateInsumoUseCase(insumoDAO);
-        updateInsumoUseCase = new UpdateInsumoUseCase(insumoDAO);
-        removeInsumoUseCase = new RemoveInsumoUseCase(insumoDAO);
-        findInsumoUseCase = new FindInsumoUseCase(insumoDAO);
+        createInsumoUseCase = new CreateInsumoUseCase(insumoDAO, estoqueDAO);
+        updateInsumoUseCase = new UpdateInsumoUseCase(insumoDAO, estoqueDAO);
+        removeInsumoUseCase = new RemoveInsumoUseCase(insumoDAO, estoqueDAO);
+        findInsumoUseCase = new FindInsumoUseCase(insumoDAO, estoqueDAO);
         previsaoRepoeEstoqueUseCase = new PrevisaoRepoeEstoqueUseCase(peixeDAO, tanqueDAO);
 
         VendaDAO vendaDAO = new InMemoryVendaDAO();

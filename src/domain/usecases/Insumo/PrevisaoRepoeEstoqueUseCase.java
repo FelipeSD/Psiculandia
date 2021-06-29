@@ -38,8 +38,8 @@ public class PrevisaoRepoeEstoqueUseCase {
                 double qtdeInsumoEstoque = insumoEstoque.getQtde();
                 double tempoEntregaFornecedor = insumoEstoque.getFornecedor().getTempoEntrega();
 
-                // resultado é a quantidade de dias que faltam para solicitar nova compra
                 double diaIdealCompra = (qtdeInsumoEstoque/qtdeRacaoAdminsitrada) - tempoEntregaFornecedor;
+                System.out.println("Levando em consideração o tempo de entrega do fornecedor, é recomendado o abastecimento do estoque em " + diaIdealCompra + " dia(s).");
                 return diaIdealCompra;
             }
         }

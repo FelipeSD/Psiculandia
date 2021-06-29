@@ -147,7 +147,7 @@ public class Main {
         });
 
         // CRIANDO VENDA
-        Venda venda1 = new Venda("tilápia", 123, 600);
+        Venda venda1 = new Venda("tilápia", 123, 600, supermercado_mar);
         createVendaUseCase.insert(venda1);
         System.out.println("\n========= LISTANDO VENDAS ==========");
         findVendaUseCase.findAll().forEach(venda -> System.out.println("venda = " + venda));

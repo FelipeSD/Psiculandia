@@ -1,5 +1,7 @@
 package domain.entities.Venda;
 
+import domain.entities.Cliente.Cliente;
+
 import java.util.Date;
 
 public class Venda {
@@ -8,6 +10,7 @@ public class Venda {
     private String peixeVendido;
     private double qtde;
     private double valor;
+    private Cliente cliente;
 
     public Venda(String peixeVendido, double qtde, double valor) {
         this.peixeVendido = peixeVendido;
@@ -16,11 +19,27 @@ public class Venda {
         this.data = new Date();
     }
 
+    public Venda(String peixeVendido, double qtde, double valor, Cliente cliente) {
+        this.peixeVendido = peixeVendido;
+        this.qtde = qtde;
+        this.valor = valor;
+        this.data = new Date();
+        this.cliente = cliente;
+    }
+
     public Venda(Date data, String peixeVendido, double qtde, double valor) {
         this.data = data;
         this.peixeVendido = peixeVendido;
         this.qtde = qtde;
         this.valor = valor;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public int getId() {

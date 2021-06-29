@@ -53,6 +53,7 @@ public class RegistrarAdministracaoDiariaRacaoUseCase {
 
                     insumoEstoque.setQtde(quantidadeFinal);
                     tanque.setCheckAlimentado(true);
+                    System.out.println("Administração da ração realizada com sucesso");
                     return true;
                 }
             }

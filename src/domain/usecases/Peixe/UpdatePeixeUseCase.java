@@ -1,7 +1,6 @@
 package domain.usecases.Peixe;
 
 import domain.entities.Peixe.Peixe;
-import domain.entities.Tanque.Tanque;
 import domain.utils.EntityNotFoundException;
 
 public class UpdatePeixeUseCase {

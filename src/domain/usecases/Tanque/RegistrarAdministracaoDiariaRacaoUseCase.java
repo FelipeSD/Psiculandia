@@ -1,6 +1,6 @@
 package domain.usecases.Tanque;
 
-import application.repository.InMemoryPeixeDAO;
+import application.repository.inmemory.InMemoryPeixeDAO;
 import domain.entities.Estoque.Estoque;
 import domain.entities.Insumo.Insumo;
 import domain.entities.Peixe.Peixe;

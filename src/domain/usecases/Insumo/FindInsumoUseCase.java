@@ -1,9 +1,7 @@
 package domain.usecases.Insumo;
 
 import domain.entities.Insumo.Insumo;
-import domain.entities.Usuario.Empregado;
 import domain.usecases.Estoque.EstoqueDAO;
-import domain.usecases.Usuario.EmpregadoDAO;
 
 import java.util.List;
 import java.util.Optional;

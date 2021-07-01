@@ -2,9 +2,7 @@ package domain.usecases.Insumo;
 
 import domain.entities.Estoque.Estoque;
 import domain.entities.Insumo.Insumo;
-import domain.entities.Tanque.Tanque;
 import domain.usecases.Estoque.EstoqueDAO;
-import domain.usecases.Tanque.TanqueDAO;
 import domain.utils.EntityNotFoundException;
 
 public class RemoveInsumoUseCase {

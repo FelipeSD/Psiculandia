@@ -1,6 +1,6 @@
 package application.main;
 
-import application.repository.*;
+import application.repository.inmemory.*;
 import domain.entities.Cliente.Cliente;
 import domain.entities.Estoque.Estoque;
 import domain.entities.Fornecedor.Fornecedor;
@@ -14,16 +14,11 @@ import domain.entities.Venda.Venda;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
 import domain.usecases.Fornecedor.*;
-import domain.usecases.Tanque.RegistrarCrescimentoEspecieUseCase;
 import domain.usecases.Insumo.*;
 import domain.usecases.Peixe.*;
 import domain.usecases.Tanque.*;
 import domain.usecases.Usuario.*;
-import domain.usecases.Venda.CreateVendaUseCase;
-import domain.usecases.Venda.FindVendaUseCase;
-import domain.usecases.Venda.RemoveVendaUseCase;
-import domain.usecases.Venda.UpdateVendaUseCase;
-import domain.usecases.Venda.VendaDAO;
+import domain.usecases.Venda.*;
 import domain.utils.InvalidPasswordException;
 
 public class Main {

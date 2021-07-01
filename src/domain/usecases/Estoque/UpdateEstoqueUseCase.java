@@ -1,8 +1,6 @@
 package domain.usecases.Estoque;
 
-import domain.entities.Cliente.Cliente;
 import domain.entities.Estoque.Estoque;
-import domain.usecases.Cliente.ClienteDAO;
 import domain.utils.EntityNotFoundException;
 
 public class UpdateEstoqueUseCase {

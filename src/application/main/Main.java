@@ -1,6 +1,7 @@
 package application.main;
 
 import application.repository.inmemory.*;
+import application.view.WindowLoader;
 import domain.entities.Cliente.Cliente;
 import domain.entities.Estoque.Estoque;
 import domain.entities.Fornecedor.Fornecedor;
@@ -71,105 +72,7 @@ public class Main {
 
     public static void main(String[] args) {
         configureInjection();
-
-        // CRIANDO EMPREGADOS
-        Empregado empregado1 = new Empregado("felpsd", "çlkjh");
-        Administrador adm1 = new Administrador("adm", "123");
-        createEmpregadoUseCase.insert(empregado1);
-        createEmpregadoUseCase.insert(adm1);
-        System.out.println("\n========= LISTANDO USUÁRIOS ==========");
-        findEmpregadoUseCase.findAll().forEach(empregado -> System.out.println("usuario = " + empregado));
-
-        // AUTENTICANDO EMPREGADOS (LOGAR E DESLOGAR)
-        try {
-            USUARIO_Sistema = loginEmpregadoUseCase.logar(empregado1.getUsername(), empregado1.getSenha());
-            //USUARIO_Sistema = loginEmpregadoUseCase.deslogar();
-        }catch (InvalidPasswordException e){
-            System.out.println("e = " + e);
-            return;
-        }
-
-        if(USUARIO_Sistema == null){
-            System.out.println("Insira corretamente as credenciais para acessar o sistema.");
-            return;
-        }
-
-        // CRIANDO PEIXES
-        Peixe tilapia = new Peixe("tilápia", 200, "Ração Tilápia", 4, 20);
-        Peixe atum = new Peixe("atum", 100, "Ração Atum", 6, 10);
-        createPeixeUseCase.insert(tilapia);
-        createPeixeUseCase.insert(atum);
-        System.out.println("\n========= LISTANDO PEIXES ==========");
-        findPeixeUseCase.findAll().forEach(peixe -> System.out.println("peixe = " + peixe));
-
-        // CRIANDO TANQUES
-        Tanque tanque1 = new Tanque("tilápia", 20);
-        Tanque tanque2 = new Tanque("atum", 10);
-        createTanqueUseCase.insert(tanque1);
-        createTanqueUseCase.insert(tanque2);
-        System.out.println("\n========= LISTANDO TANQUES ==========");
-        findTanqueUseCase.findAll().forEach(tanque -> System.out.println("tanque = " + tanque));
-
-        // CRIANDO CLIENTES
-        Cliente supermercado_mar = new Cliente(
-                "09.044.577/0001-90",
-                "Supermercado Mar",
-                "16992320932",
-                "supermar@mercados.com"
-        );
-        createClienteUseCase.insert(supermercado_mar);
-        System.out.println("\n========= LISTANDO CLIENTES ==========");
-        findClienteUseCase.findAll().forEach(cliente -> System.out.println("cliente = " + cliente));
-
-        // CRIANDO FORNECEDORES
-        Fornecedor fornecedor1 = new Fornecedor("FORNE");
-        createFornecedorUseCase.insert(fornecedor1);
-        System.out.println("\n========= LISTANDO FORNECEDORES ==========");
-        findFornecedorUseCase.findAll().forEach(fornecedor -> System.out.println("fornecedor = " + fornecedor));
-
-        // CRIANDO ESTOQUE
-        Estoque estoque = new Estoque();
-        createEstoqueUseCase.insert(estoque);
-
-        // CRIANDO INSUMO
-        Insumo racao = new Insumo("Ração Tilápia", 160, 80, fornecedor1);
-        createInsumoUseCase.insert(racao, estoque);
-        System.out.println("\n========= LISTANDO INSUMOS ESTOQUE ==========");
-        findEstoqueUseCase.findAll().forEach(estoqueItem -> {
-            for(Insumo insumo : estoqueItem.listarInsumos()){
-                System.out.println("insumo = " + insumo);
-            }
-        });
-
-        // CRIANDO VENDA
-        Venda venda1 = new Venda("tilápia", 123, 600, supermercado_mar);
-        createVendaUseCase.insert(venda1);
-        System.out.println("\n========= LISTANDO VENDAS ==========");
-        findVendaUseCase.findAll().forEach(venda -> System.out.println("venda = " + venda));
-        System.out.println("\n");
-
-        // REGISTRANDO CRESCIMENTO SEMANAL DE ESPÉCIE
-        registrarCrescimentoEspecieUseCase.registrar(tanque1, 290);
-        try {
-            Thread.sleep(2000);
-            registrarCrescimentoEspecieUseCase.registrar(tanque1, 300);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        registrarCrescimentoEspecieUseCase.registrar(tanque2, 100);
-        System.out.println("\n========= LISTANDO HISTORICO DE CRESCIMENTO ==========");
-        findTanqueUseCase.findAll().forEach(tanque -> {
-            System.out.println("\n\t***Historico do tanque: " + tanque.getEspecieCriada() + "***");
-            for(HistoricoSemanalCrescimento historico : tanque.getHistoricoSemanal()){
-                System.out.println("historico.getDataLancada = " + historico.getDataLancada());
-                System.out.println("historico.getPesoMedio() = " + historico.getPesoMedio());
-            }
-        });
-
-        registrarAdministracaoDiariaRacaoUseCase.administrarRacao(tanque1, estoque);
-        // registrarAdministracaoDiariaRacaoUseCase.administrarRacao(tanque1, estoque);
-        previsaoVendaPeixeUseCase.preveVenda(tanque1);
-        previsaoRepoeEstoqueUseCase.preveReposicao(tanque1, estoque);
+        WindowLoader.main(args);
 
     }
 

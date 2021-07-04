@@ -17,7 +17,7 @@ public class WindowLoader extends Application {
         scene = new Scene(loadFXML("Login"), 600, 420);
         stage.getIcons().add(new Image("assets/logo.png"));
         stage.setTitle("Psiculândia");
-        stage.setResizable(false);
+//        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

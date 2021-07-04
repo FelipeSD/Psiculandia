@@ -32,20 +32,24 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainUIController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.MainUIController">
   <children>
     <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" VBox.vgrow="NEVER">
       <items>
-        <AnchorPane>
-               <children>
-                  <VBox alignment="CENTER" layoutX="17.0" layoutY="106.0" prefHeight="361.0" prefWidth="188.0" spacing="30.0" AnchorPane.bottomAnchor="107.33333333333331" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.333333333333343" AnchorPane.topAnchor="106.0">
+            <ScrollPane fitToHeight="true" fitToWidth="true">
+               <content>
+                  <VBox alignment="CENTER" prefHeight="361.0" prefWidth="188.0" spacing="30.0">
                      <children>
                         <Button id="GerenciarTanque" fx:id="btnGerenciarTanque" mnemonicParsing="false" onMouseClicked="#abrirFXML" style="-fx-background-color: transparent;">
                            <graphic>
@@ -61,16 +65,20 @@
                               </HBox>
                            </graphic>
                         </Button>
-                        <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/icon/fish.png" />
-                                 </image>
-                              </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciar Peixe" textOrigin="CENTER" />
-                           </children>
-                        </HBox>
+                        <Button id="GerenciarPeixe" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
+                                 <children>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/icon/fish.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciar Peixe" textOrigin="CENTER" />
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </Button>
                         <Button id="GerenciarFornecedor" fx:id="btnGerenciarFornecedor" mnemonicParsing="false" onMouseClicked="#abrirFXML" style="-fx-background-color: transparent;">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
@@ -85,7 +93,7 @@
                               </HBox>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: transparent;">
+                        <Button id="GerenciarVenda" mnemonicParsing="false" style="-fx-background-color: transparent;">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
                                  <children>
@@ -99,66 +107,52 @@
                               </HBox>
                            </graphic>
                         </Button>
-                        <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/icon/fish-food.png" />
-                                 </image>
-                              </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciar Estoque" textOrigin="CENTER" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
-                           <children>
-                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/icon/pie-chart.png" />
-                                 </image>
-                              </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Relatórios" textOrigin="CENTER" />
-                           </children>
-                        </HBox>
+                        <Button id="GerenciarEstoque" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
+                                 <children>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/icon/fish-food.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciar Estoque" textOrigin="CENTER" />
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </Button>
+                        <Button id="Relatorio" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
+                                 <children>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/icon/pie-chart.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Relatórios" textOrigin="CENTER" />
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </Button>
                      </children>
                   </VBox>
-               </children>
-        </AnchorPane>
+               </content>
+            </ScrollPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
-            <AnchorPane id="Content" fx:id="paneContainer" minHeight="-1.0" minWidth="-1.0" prefHeight="626.0" prefWidth="663.0">
-              <children>
-                <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" style="&#10;" text="View" textAlignment="CENTER" wrapText="false">
+            <AnchorPane id="Content" fx:id="paneContainer" minHeight="-1.0" minWidth="-1.0" prefHeight="626.0" prefWidth="663.0" style="-fx-background-color: transparent;">
+                     <children>
+                        <Text fontSmoothingType="LCD" layoutX="199.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem-vindo!" wrappingWidth="265.4036865234375">
                            <font>
-                      <Font size="18.0" fx:id="x1" />
+                              <Font size="48.0" />
                            </font>
-                           <textFill>
-                      <Color red="0.624" green="0.624" blue="0.624" fx:id="x2" />
-                           </textFill></Label>
-              </children>
+                        </Text>
+                     </children>
             </AnchorPane>
           </content>
         </ScrollPane>
       </items>
     </SplitPane>
-    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
-      <children>
-        <Label maxHeight="1.7976931348623157E308" maxWidth="-1.0" text="Left status" HBox.hgrow="ALWAYS">
-          <font>
-            <Font size="11.0" fx:id="x3" />
-          </font>
-          <textFill>
-            <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
-          </textFill>
-        </Label>
-        <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Text layoutX="220.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copyright © 2021" />
-               </children></Pane>
-        <Label font="$x3" maxWidth="-1.0" text="Right status" textFill="$x4" HBox.hgrow="NEVER" />
-      </children>
-      <padding>
-        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-      </padding>
-    </HBox>
   </children>
 </VBox>

@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.view.WindowLoader;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -28,5 +29,8 @@ public class LoginController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void abrirCadastro(ActionEvent actionEvent) {
     }
 }

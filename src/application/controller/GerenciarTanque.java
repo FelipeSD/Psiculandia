@@ -1,12 +1,14 @@
 package application.controller;
 
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
 
-public class GerenciarTanque {
-    public Button btnTeste1;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    public void teste1(ActionEvent actionEvent) {
-        System.out.println("oi 1");
+public class GerenciarTanque implements Initializable {
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }

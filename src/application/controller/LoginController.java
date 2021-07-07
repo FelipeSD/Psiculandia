@@ -1,6 +1,5 @@
 package application.controller;
 
-import application.view.WindowLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,7 +20,7 @@ public class LoginController {
     public Button btnEntrar;
     public AnchorPane anchorPane;
 
-    public void logar(MouseEvent mouseEvent) throws IOException {
+    public void logar(ActionEvent mouseEvent) throws IOException {
         Stage stage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../../resources/MainUI.fxml")));
 

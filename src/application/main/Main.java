@@ -2,16 +2,7 @@ package application.main;
 
 import application.repository.inmemory.*;
 import application.view.WindowLoader;
-import domain.entities.Cliente.Cliente;
-import domain.entities.Estoque.Estoque;
-import domain.entities.Fornecedor.Fornecedor;
-import domain.entities.Insumo.Insumo;
-import domain.entities.Peixe.Peixe;
-import domain.entities.Tanque.HistoricoSemanalCrescimento;
-import domain.entities.Tanque.Tanque;
-import domain.entities.Usuario.Administrador;
 import domain.entities.Usuario.Empregado;
-import domain.entities.Venda.Venda;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
 import domain.usecases.Fornecedor.*;
@@ -20,60 +11,58 @@ import domain.usecases.Peixe.*;
 import domain.usecases.Tanque.*;
 import domain.usecases.Usuario.*;
 import domain.usecases.Venda.*;
-import domain.utils.InvalidPasswordException;
 
 public class Main {
-    private static CreateEmpregadoUseCase createEmpregadoUseCase;
-    private static UpdateEmpregadoUseCase updateEmpregadoUseCase;
-    private static RemoveEmpregadoUseCase removeEmpregadoUseCase;
-    private static FindEmpregadoUseCase findEmpregadoUseCase;
-    private static LoginEmpregadoUseCase loginEmpregadoUseCase;
+    public static CreateEmpregadoUseCase createEmpregadoUseCase;
+    public static UpdateEmpregadoUseCase updateEmpregadoUseCase;
+    public static RemoveEmpregadoUseCase removeEmpregadoUseCase;
+    public static FindEmpregadoUseCase findEmpregadoUseCase;
+    public static LoginEmpregadoUseCase loginEmpregadoUseCase;
 
-    private static CreateTanqueUseCase createTanqueUseCase;
-    private static UpdateTanqueUseCase updateTanqueUseCase;
-    private static RemoveTanqueUseCase removeTanqueUseCase;
-    private static FindTanqueUseCase findTanqueUseCase;
-    private static RegistrarCrescimentoEspecieUseCase registrarCrescimentoEspecieUseCase;
-    private static RegistrarAdministracaoDiariaRacaoUseCase registrarAdministracaoDiariaRacaoUseCase;
-    private static PrevisaoVendaPeixeUseCase previsaoVendaPeixeUseCase;
+    public static CreateTanqueUseCase createTanqueUseCase;
+    public static UpdateTanqueUseCase updateTanqueUseCase;
+    public static RemoveTanqueUseCase removeTanqueUseCase;
+    public static FindTanqueUseCase findTanqueUseCase;
+    public static RegistrarCrescimentoEspecieUseCase registrarCrescimentoEspecieUseCase;
+    public static RegistrarAdministracaoDiariaRacaoUseCase registrarAdministracaoDiariaRacaoUseCase;
+    public static PrevisaoVendaPeixeUseCase previsaoVendaPeixeUseCase;
 
-    private static CreatePeixeUseCase createPeixeUseCase;
-    private static UpdatePeixeUseCase updatePeixeUseCase;
-    private static RemovePeixeUseCase removePeixeUseCase;
-    private static FindPeixeUseCase findPeixeUseCase;
+    public static CreatePeixeUseCase createPeixeUseCase;
+    public static UpdatePeixeUseCase updatePeixeUseCase;
+    public static RemovePeixeUseCase removePeixeUseCase;
+    public static FindPeixeUseCase findPeixeUseCase;
 
-    private static CreateClienteUseCase createClienteUseCase;
-    private static UpdateClienteUseCase updateClienteUseCase;
-    private static RemoveClienteUseCase removeClienteUseCase;
-    private static FindClienteUseCase findClienteUseCase;
+    public static CreateClienteUseCase createClienteUseCase;
+    public static UpdateClienteUseCase updateClienteUseCase;
+    public static RemoveClienteUseCase removeClienteUseCase;
+    public static FindClienteUseCase findClienteUseCase;
 
-    private static CreateFornecedorUseCase createFornecedorUseCase;
-    private static UpdateFornecedorUseCase updateFornecedorUseCase;
-    private static RemoveFornecedorUseCase removeFornecedorUseCase;
-    private static FindFornecedorUseCase findFornecedorUseCase;
+    public static CreateFornecedorUseCase createFornecedorUseCase;
+    public static UpdateFornecedorUseCase updateFornecedorUseCase;
+    public static RemoveFornecedorUseCase removeFornecedorUseCase;
+    public static FindFornecedorUseCase findFornecedorUseCase;
 
-    private static CreateEstoqueUseCase createEstoqueUseCase;
-    private static UpdateEstoqueUseCase updateEstoqueUseCase;
-    private static RemoveEstoqueUseCase removeEstoqueUseCase;
-    private static FindEstoqueUseCase findEstoqueUseCase;
+    public static CreateEstoqueUseCase createEstoqueUseCase;
+    public static UpdateEstoqueUseCase updateEstoqueUseCase;
+    public static RemoveEstoqueUseCase removeEstoqueUseCase;
+    public static FindEstoqueUseCase findEstoqueUseCase;
 
-    private static CreateInsumoUseCase createInsumoUseCase;
-    private static UpdateInsumoUseCase updateInsumoUseCase;
-    private static RemoveInsumoUseCase removeInsumoUseCase;
-    private static FindInsumoUseCase findInsumoUseCase;
-    private static PrevisaoRepoeEstoqueUseCase previsaoRepoeEstoqueUseCase;
+    public static CreateInsumoUseCase createInsumoUseCase;
+    public static UpdateInsumoUseCase updateInsumoUseCase;
+    public static RemoveInsumoUseCase removeInsumoUseCase;
+    public static FindInsumoUseCase findInsumoUseCase;
+    public static PrevisaoRepoeEstoqueUseCase previsaoRepoeEstoqueUseCase;
 
-    private static CreateVendaUseCase createVendaUseCase;
-    private static UpdateVendaUseCase updateVendaUseCase;
-    private static RemoveVendaUseCase removeVendaUseCase;
-    private static FindVendaUseCase findVendaUseCase;
+    public static CreateVendaUseCase createVendaUseCase;
+    public static UpdateVendaUseCase updateVendaUseCase;
+    public static RemoveVendaUseCase removeVendaUseCase;
+    public static FindVendaUseCase findVendaUseCase;
 
-    private static Empregado USUARIO_Sistema;
+    public static Empregado USUARIO_Sistema;
 
     public static void main(String[] args) {
         configureInjection();
         WindowLoader.main(args);
-
     }
 
     private static void configureInjection() {

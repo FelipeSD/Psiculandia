@@ -47,11 +47,11 @@
   <children>
     <SplitPane dividerPositions="0.2505567928730512" focusTraversable="true" VBox.vgrow="NEVER">
       <items>
-            <ScrollPane fitToHeight="true" fitToWidth="true">
+            <ScrollPane fitToHeight="true" fitToWidth="true" maxWidth="300.0" minWidth="200.0">
                <content>
                   <VBox alignment="CENTER" prefHeight="361.0" prefWidth="188.0" spacing="30.0">
                      <children>
-                        <Button id="GerenciarTanque" fx:id="btnGerenciarTanque" mnemonicParsing="false" onMouseClicked="#abrirFXML" style="-fx-background-color: transparent;">
+                        <Button id="GerenciarTanque" fx:id="btnGerenciarTanque" mnemonicParsing="false" onAction="#abrirFXML" style="-fx-background-color: transparent;">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
                                  <children>
@@ -65,7 +65,7 @@
                               </HBox>
                            </graphic>
                         </Button>
-                        <Button id="GerenciarPeixe" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                        <Button id="GerenciarPeixe" fx:id="btnGerenciarPeixe" mnemonicParsing="false" onAction="#abrirFXML" style="-fx-background-color: transparent;">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
                                  <children>
@@ -79,7 +79,7 @@
                               </HBox>
                            </graphic>
                         </Button>
-                        <Button id="GerenciarFornecedor" fx:id="btnGerenciarFornecedor" mnemonicParsing="false" onMouseClicked="#abrirFXML" style="-fx-background-color: transparent;">
+                        <Button id="GerenciarFornecedor" fx:id="btnGerenciarFornecedor" mnemonicParsing="false" onAction="#abrirFXML" style="-fx-background-color: transparent;">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
                                  <children>
@@ -93,7 +93,21 @@
                               </HBox>
                            </graphic>
                         </Button>
-                        <Button id="GerenciarVenda" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                        <Button id="GerenciarCliente" fx:id="btnGerenciarCliente" mnemonicParsing="false" onAction="#abrirFXML" style="-fx-background-color: transparent;">
+                           <graphic>
+                              <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
+                                 <children>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../assets/icon/customer.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciar Cliente" textOrigin="CENTER" />
+                                 </children>
+                              </HBox>
+                           </graphic>
+                        </Button>
+                        <Button id="GerenciarVenda" fx:id="btnGerenciarVenda" mnemonicParsing="false" onAction="#abrirFXML" style="-fx-background-color: transparent;">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
                                  <children>
@@ -107,7 +121,7 @@
                               </HBox>
                            </graphic>
                         </Button>
-                        <Button id="GerenciarEstoque" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                        <Button id="GerenciarEstoque" fx:id="btnGerenciarEstoque" mnemonicParsing="false" style="-fx-background-color: transparent;">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
                                  <children>
@@ -121,7 +135,7 @@
                               </HBox>
                            </graphic>
                         </Button>
-                        <Button id="Relatorio" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                        <Button id="Relatorio" fx:id="btnRelatorios" mnemonicParsing="false" onAction="#abrirFXML" style="-fx-background-color: transparent;">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
                                  <children>
@@ -139,11 +153,11 @@
                   </VBox>
                </content>
             </ScrollPane>
-        <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
+        <ScrollPane prefHeight="662.0" prefWidth="551.0">
           <content>
-            <AnchorPane id="Content" fx:id="paneContainer" minHeight="-1.0" minWidth="-1.0" prefHeight="626.0" prefWidth="663.0" style="-fx-background-color: transparent;">
+            <AnchorPane id="Content" fx:id="paneContainer" minHeight="-1.0" minWidth="-1.0" prefHeight="597.0" prefWidth="670.0" style="-fx-background-color: transparent;">
                      <children>
-                        <Text fontSmoothingType="LCD" layoutX="199.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem-vindo!" wrappingWidth="265.4036865234375">
+                        <Text fontSmoothingType="LCD" layoutX="202.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bem-vindo!" wrappingWidth="265.4036865234375">
                            <font>
                               <Font size="48.0" />
                            </font>

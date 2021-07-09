@@ -6,7 +6,7 @@ import domain.entities.Usuario.UsuarioValidator;
 import domain.utils.EntityNotFoundException;
 
 public class UpdateEmpregadoUseCase {
-    private EmpregadoDAO empregadoDAO;
+    private final EmpregadoDAO empregadoDAO;
     public UpdateEmpregadoUseCase(EmpregadoDAO empregadoDAO) {
         this.empregadoDAO = empregadoDAO;
     }

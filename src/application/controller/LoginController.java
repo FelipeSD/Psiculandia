@@ -22,7 +22,7 @@ public class LoginController {
 
     public void logar(ActionEvent mouseEvent) throws IOException {
         Stage stage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../../resources/MainUI.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/resources/MainUI.fxml")));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);

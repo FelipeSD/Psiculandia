@@ -13,6 +13,7 @@ import javafx.scene.layout.FlowPane;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static application.main.Main.findFornecedorUseCase;
@@ -45,9 +46,9 @@ public class GerenciarFornecedor implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bindTableViewToItemsList();
-        associarColunasAosValores();
+        associarValoresComColunas();
+        desabilitarFormulario();
 
-        //desabilitarFormulario();
         listaProdutos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         Insumo insumo1 = new Insumo("Teste1", 12, 14.00);
         Insumo insumo2 = new Insumo("Teste2", 12, 14.00);
@@ -64,6 +65,10 @@ public class GerenciarFornecedor implements Initializable {
         tableViewFornecedor.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             System.out.println("obs + oldSelection + newSelection = " + obs + oldSelection + newSelection);
         });
+    }
+
+    public Fornecedor getSelectedItem(){
+        return tableViewFornecedor.getSelectionModel().getSelectedItem();
     }
 
     public void limparCampos(){
@@ -105,22 +110,68 @@ public class GerenciarFornecedor implements Initializable {
     }
 
     public void editar(ActionEvent actionEvent) {
-        habilitarFormulario();
+        Fornecedor fornecedor = this.getSelectedItem();
+
+        if(fornecedor == null){
+            showAlert(
+                    "Não foi possível editar",
+                    "Selecione um fornecedor na tabela para editar.",
+                    Alert.AlertType.ERROR,
+                    null
+            );
+        }else{
+            habilitarFormulario();
+            preencherDadosFornecedor();
+        }
+    }
+
+    private void preencherDadosFornecedor() {
+        Fornecedor fornecedor = this.getSelectedItem();
+        txtNome.setText(fornecedor.getNome());
+        txtCNPJ.setText(fornecedor.getCnpj());
+        txtEndereco.setText(fornecedor.getEnedereco());
+        txtTempoEntrega.setText(String.valueOf(fornecedor.getTempoEntrega()));
     }
 
     public void excluir(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Excluir");
-        alert.setHeaderText("Você está prestes a excluir um fornecedor");
-        alert.setContentText("Tem certeza que deseja realmente excluir?: ");
+        Fornecedor fornecedor = this.getSelectedItem();
 
-        if(alert.showAndWait().get() == ButtonType.OK){
-            // EXCLUIR
-            System.out.println("Fornecedor excluído com sucesso");
+        if(fornecedor == null){
+            showAlert(
+                    "Não foi possível excluir",
+                    "Selecione um fornecedor na tabela para excluir.",
+                    Alert.AlertType.ERROR,
+                    null
+            );
+        }else{
+            showAlert(
+                    "Excluir",
+                    "Deseja realmente excluir: " + fornecedor,
+                    Alert.AlertType.CONFIRMATION,
+                    new AlertCallback() {
+                        @Override
+                        public void onConfirm() {
+
+                        }
+
+                        @Override
+                        public void onCancel() {
+                            tableViewFornecedor.getSelectionModel().clearSelection();
+                        }
+                    }
+            );
         }
     }
 
     public void salvar(ActionEvent actionEvent) {
+//        boolean newUser = findUserUseCase.findOne(user.getInstitutionalId()).isEmpty();
+//
+//        if (newUser) {
+//            createUserUseCase.insert(user);
+//        } else {
+//            updateUserUseCase.update(user);
+//        }
+
         habilitarBotoes();
         desabilitarFormulario();
         limparCampos();
@@ -137,14 +188,35 @@ public class GerenciarFornecedor implements Initializable {
         tableViewFornecedor.setItems(fornecedores);
     }
 
-    public void associarColunasAosValores(){
+    public void associarValoresComColunas(){
         cNome.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("nome"));
         cCNPJ.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("cnpj"));
         cEndereco.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("endereco"));
         cTempoEntrega.setCellValueFactory(new PropertyValueFactory<Fornecedor, Integer>("tempoEntrega"));
     }
 
-    private void carregarDadosEExibi4r(){
+    private void showAlert(
+            String title,
+            String message,
+            Alert.AlertType type,
+            AlertCallback callback
+    ){
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.setHeaderText(null);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if(callback != null && result.isPresent()){
+            if(result.get() == ButtonType.OK) {
+                callback.onConfirm();
+            }else if (result.get() == ButtonType.CANCEL){
+                callback.onCancel();
+            }
+        }
+    }
+
+    private void carregarDadosEExibir(){
         List<Fornecedor> fornecedorList = findFornecedorUseCase.findAll();
         fornecedores.clear();
         fornecedores.addAll(fornecedorList);

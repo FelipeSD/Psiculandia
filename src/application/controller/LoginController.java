@@ -20,8 +20,8 @@ public class LoginController {
     public Button btnEntrar;
     public AnchorPane anchorPane;
 
-    public void logar(ActionEvent mouseEvent) throws IOException {
-        Stage stage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
+    public void logar(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/resources/MainUI.fxml")));
 
         Scene scene = new Scene(root);
@@ -29,6 +29,12 @@ public class LoginController {
         stage.show();
     }
 
-    public void abrirCadastro(ActionEvent actionEvent) {
+    public void abrirCadastro(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/resources/Cadastro.fxml")));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

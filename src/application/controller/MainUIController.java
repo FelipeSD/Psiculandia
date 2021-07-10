@@ -22,6 +22,7 @@ public class MainUIController {
     public void abrirFXML(ActionEvent mouseEvent) throws IOException {
         Button clickedButton = (Button) mouseEvent.getSource();
         String fxmlName = clickedButton.getId();
+        System.out.println("fxmlName = " + fxmlName);
         Parent newLoadedPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/resources/" +fxmlName+".fxml")));
         paneContainer.getChildren().setAll(newLoadedPane);
     }

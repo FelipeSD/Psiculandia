@@ -58,8 +58,6 @@ public class Main {
     public static RemoveVendaUseCase removeVendaUseCase;
     public static FindVendaUseCase findVendaUseCase;
 
-    public static Empregado USUARIO_Sistema;
-
     public static void main(String[] args) {
         configureInjection();
         WindowLoader.main(args);

@@ -4,7 +4,7 @@ public class Fornecedor {
     private int id;
     private String cnpj;
     private String nome;
-    private String enedereco;
+    private String endereco;
     private String[] produtos;
     private int tempoEntrega;
 
@@ -39,12 +39,12 @@ public class Fornecedor {
         this.nome = nome;
     }
 
-    public String getEnedereco() {
-        return enedereco;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEnedereco(String enedereco) {
-        this.enedereco = enedereco;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String[] getProdutos() {

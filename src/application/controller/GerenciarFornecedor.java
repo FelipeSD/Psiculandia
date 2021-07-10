@@ -1,7 +1,6 @@
 package application.controller;
 
 import domain.entities.Fornecedor.Fornecedor;
-import domain.entities.Insumo.Insumo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static application.main.Main.findFornecedorUseCase;
+import static application.main.Main.*;
 
 public class GerenciarFornecedor implements Initializable {
     public Button btnAdicionar;
@@ -33,38 +32,36 @@ public class GerenciarFornecedor implements Initializable {
     public TextField txtCNPJ;
     public TextField txtEndereco;
     public TextField txtTempoEntrega;
-    public TextArea txtProdutos;
 
     public Button btnSalvar;
     public Button btnCancelar;
 
     public FlowPane formularioPane;
-    public ListView<Insumo> listaProdutos = new ListView<Insumo>();
 
     private ObservableList<Fornecedor> fornecedores;
+
+    private Fornecedor fornecedorSelecionado;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bindTableViewToItemsList();
         associarValoresComColunas();
         desabilitarFormulario();
-
-        listaProdutos.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        Insumo insumo1 = new Insumo("Teste1", 12, 14.00);
-        Insumo insumo2 = new Insumo("Teste2", 12, 14.00);
-        listaProdutos.getItems().add(insumo1);
-        listaProdutos.getItems().add(insumo1);
-        listaProdutos.getItems().add(insumo1);
-        listaProdutos.getItems().add(insumo1);
-        listaProdutos.getItems().add(insumo2);
-
+        carregarDadosEExibir();
         bindOnSelectEvent();
     }
 
     public void bindOnSelectEvent(){
         tableViewFornecedor.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             System.out.println("obs + oldSelection + newSelection = " + obs + oldSelection + newSelection);
+            fornecedorSelecionado = newSelection;
         });
+    }
+
+    private void carregarDadosEExibir(){
+        List<Fornecedor> fornecedorList = findFornecedorUseCase.findAll();
+        fornecedores.clear();
+        fornecedores.addAll(fornecedorList);
     }
 
     public Fornecedor getSelectedItem(){
@@ -77,6 +74,8 @@ public class GerenciarFornecedor implements Initializable {
                 ((TextInputControl)node).setText("");
             }
         }
+
+        tableViewFornecedor.getSelectionModel().clearSelection();
     }
 
     public void habilitarFormulario(){
@@ -104,9 +103,9 @@ public class GerenciarFornecedor implements Initializable {
     }
 
     public void adicionar(ActionEvent actionEvent) {
-        fornecedores.add(new Fornecedor("teste"));
         desabilitarBotoes();
         habilitarFormulario();
+        limparCampos();
     }
 
     public void editar(ActionEvent actionEvent) {
@@ -126,17 +125,14 @@ public class GerenciarFornecedor implements Initializable {
     }
 
     private void preencherDadosFornecedor() {
-        Fornecedor fornecedor = this.getSelectedItem();
-        txtNome.setText(fornecedor.getNome());
-        txtCNPJ.setText(fornecedor.getCnpj());
-        txtEndereco.setText(fornecedor.getEnedereco());
-        txtTempoEntrega.setText(String.valueOf(fornecedor.getTempoEntrega()));
+        txtNome.setText(fornecedorSelecionado.getNome());
+        txtCNPJ.setText(fornecedorSelecionado.getCnpj());
+        txtEndereco.setText(fornecedorSelecionado.getEndereco());
+        txtTempoEntrega.setText(String.valueOf(fornecedorSelecionado.getTempoEntrega()));
     }
 
     public void excluir(ActionEvent actionEvent) {
-        Fornecedor fornecedor = this.getSelectedItem();
-
-        if(fornecedor == null){
+        if(fornecedorSelecionado == null){
             showAlert(
                     "Não foi possível excluir",
                     "Selecione um fornecedor na tabela para excluir.",
@@ -146,12 +142,13 @@ public class GerenciarFornecedor implements Initializable {
         }else{
             showAlert(
                     "Excluir",
-                    "Deseja realmente excluir: " + fornecedor,
+                    "Deseja realmente excluir: " + fornecedorSelecionado,
                     Alert.AlertType.CONFIRMATION,
                     new AlertCallback() {
                         @Override
                         public void onConfirm() {
-
+                            removeFornecedorUseCase.remove(fornecedorSelecionado);
+                            carregarDadosEExibir();
                         }
 
                         @Override
@@ -164,14 +161,17 @@ public class GerenciarFornecedor implements Initializable {
     }
 
     public void salvar(ActionEvent actionEvent) {
-//        boolean newUser = findUserUseCase.findOne(user.getInstitutionalId()).isEmpty();
-//
-//        if (newUser) {
-//            createUserUseCase.insert(user);
-//        } else {
-//            updateUserUseCase.update(user);
-//        }
+        fornecedorSelecionado = obterFornecedorFormulario();
 
+        if (fornecedorSelecionado.getId() == 0) {
+            createFornecedorUseCase.insert(fornecedorSelecionado);
+        } else {
+            updateFornecedorUseCase.update(fornecedorSelecionado);
+        }
+
+        carregarDadosEExibir();
+
+        fornecedorSelecionado = null;
         habilitarBotoes();
         desabilitarFormulario();
         limparCampos();
@@ -181,6 +181,18 @@ public class GerenciarFornecedor implements Initializable {
         habilitarBotoes();
         desabilitarFormulario();
         limparCampos();
+    }
+
+    private Fornecedor obterFornecedorFormulario(){
+        if(fornecedorSelecionado == null)
+            fornecedorSelecionado = new Fornecedor();
+
+        fornecedorSelecionado.setNome(txtNome.getText());
+        fornecedorSelecionado.setCnpj(txtCNPJ.getText());
+        fornecedorSelecionado.setEndereco(txtEndereco.getText());
+        fornecedorSelecionado.setTempoEntrega(Integer.parseInt(txtTempoEntrega.getText()));
+
+        return fornecedorSelecionado;
     }
 
     private void bindTableViewToItemsList() {
@@ -214,11 +226,5 @@ public class GerenciarFornecedor implements Initializable {
                 callback.onCancel();
             }
         }
-    }
-
-    private void carregarDadosEExibir(){
-        List<Fornecedor> fornecedorList = findFornecedorUseCase.findAll();
-        fornecedores.clear();
-        fornecedores.addAll(fornecedorList);
     }
 }

@@ -1,8 +1,8 @@
 package application.main;
 
 import application.repository.inmemory.*;
+import application.repository.sqlite.DatabaseBuilder;
 import application.view.WindowLoader;
-import domain.entities.Usuario.Empregado;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
 import domain.usecases.Fornecedor.*;
@@ -60,7 +60,13 @@ public class Main {
 
     public static void main(String[] args) {
         configureInjection();
+        setupDatabase();
         WindowLoader.main(args);
+    }
+
+    private static void setupDatabase() {
+        DatabaseBuilder dbBuilder = new DatabaseBuilder();
+        dbBuilder.buildDatabaseIfMissing();
     }
 
     private static void configureInjection() {

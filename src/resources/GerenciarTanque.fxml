@@ -40,7 +40,7 @@
             </TableView>
          </children>
       </VBox>
-      <FlowPane fx:id="formularioPane" alignment="CENTER" hgap="10.0" layoutX="14.0" layoutY="399.0" prefHeight="108.0" prefWidth="647.0" vgap="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+      <FlowPane fx:id="formularioPane" hgap="10.0" layoutX="14.0" layoutY="399.0" prefHeight="108.0" prefWidth="647.0" vgap="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <children>
             <ComboBox fx:id="cbEspecie" prefHeight="25.0" prefWidth="179.0" promptText="Espécie" />
             <TextField fx:id="txtQuantidadePeixes" prefHeight="25.0" prefWidth="129.0" promptText="Quantidade peixes" />

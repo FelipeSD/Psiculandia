@@ -7,6 +7,14 @@ public class Cliente {
     private String telefone;
     private String email;
 
+    public Cliente(int id, String cnpj, String nome, String telefone, String email){
+        this.id = id;
+        this.cnpj = cnpj;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
     public Cliente(String cnpj, String nome, String telefone, String email){
         this.cnpj = cnpj;
         this.nome = nome;

@@ -14,7 +14,7 @@ public class LoginEmpregadoUseCase {
         this.empregadoDAO = empregadoDAO;
     }
 
-    public Empregado logar(String username, String password) throws InvalidPasswordException {
+    public Empregado logar(String username, String password) throws InvalidPasswordException, EntityNotFoundException {
         Empregado empregadoValidar = new Empregado(username, password);
         UsuarioValidator validator = new UsuarioValidator();
 

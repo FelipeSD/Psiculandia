@@ -40,9 +40,11 @@ public class LoginController {
     public void logar(ActionEvent actionEvent) throws IOException {
         try {
             Empregado empregadoLogado = loginEmpregadoUseCase.logar(txtUsername.getText(), txtSenha.getText());
-            MainUIController controller = (MainUIController) abrirFxml("MainUI");
-            System.out.println("empregadoLogado = " + empregadoLogado);
-            if(controller != null) controller.EMPREGADO_Sistema = empregadoLogado;
+            if(empregadoLogado != null){
+                MainUIController controller = (MainUIController) abrirFxml("MainUI");
+                System.out.println("empregadoLogado = " + empregadoLogado);
+                if(controller != null) controller.EMPREGADO_Sistema = empregadoLogado;
+            }
         } catch (EntityNotFoundException | InvalidPasswordException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Login falhou");

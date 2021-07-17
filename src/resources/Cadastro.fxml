@@ -4,7 +4,9 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -22,6 +24,16 @@
               </Label>
               <TextField fx:id="txtUsername" prefHeight="290.0" prefWidth="233.0" promptText="Username" />
               <PasswordField fx:id="txtSenha" promptText="Senha" style="-fx-padding: 5px;" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <RadioButton fx:id="rbAdministrador" mnemonicParsing="false" text="Administrador">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="rbGroupTipo" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rbEmpregado" mnemonicParsing="false" selected="true" text="Empregado" toggleGroup="$rbGroupTipo" />
+               </children>
+            </HBox>
               <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#cadastrar" prefHeight="32.0" prefWidth="233.0" style="-fx-background-color: #8257e5; -fx-padding: 5px;" text="Cadastrar" textFill="WHITE" />
             <HBox alignment="CENTER_LEFT" spacing="5.0">
                <children>

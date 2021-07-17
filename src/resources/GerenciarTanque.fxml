@@ -46,9 +46,9 @@
             <TextField fx:id="txtQuantidadePeixes" prefHeight="25.0" prefWidth="129.0" promptText="Quantidade peixes" />
             <TextField fx:id="txtPrecoManutencao" prefHeight="25.0" prefWidth="132.0" promptText="Preço manutenção" />
             <TextField fx:id="txtDataInicio" prefHeight="25.0" prefWidth="147.0" promptText="Data início" />
-            <TextField fx:id="txtPesoMedioInicio" prefHeight="25.0" prefWidth="161.0" promptText="Peso médio inicial" />
-            <TextField fx:id="txtPesoMedioAtual" prefHeight="25.0" prefWidth="161.0" promptText="Peso médio atual" />
-            <TextField fx:id="txtQuantidadeRacaoDiaria" prefHeight="25.0" prefWidth="161.0" promptText="Quantidade ração diária" />
+            <TextField fx:id="txtPesoMedioInicio" prefHeight="25.0" prefWidth="179.0" promptText="Peso médio inicial" />
+            <TextField fx:id="txtPesoMedioAtual" prefHeight="25.0" prefWidth="129.0" promptText="Peso médio atual" />
+            <TextField fx:id="txtQuantidadeRacaoDiaria" prefHeight="25.0" prefWidth="148.0" promptText="Quantidade ração diária" />
             <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="633.0" spacing="10.0">
                <children>
                   <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvar" text="Salvar" />

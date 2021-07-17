@@ -21,6 +21,16 @@ public class Tanque {
         this.qtdAlevinos = qtdAlevinos;
     }
 
+    public Tanque(int id, String especieCriada, int qtdAlevinos, double precoManutencao, String dataInicio, String dataFim, int checkAlimentado) {
+        this.id = id;
+        this.especieCriada = especieCriada;
+        this.qtdAlevinos = qtdAlevinos;
+        this.precoManutencao = precoManutencao;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.checkAlimentado = checkAlimentado == 1;
+    }
+
     public int getId() {
         return id;
     }

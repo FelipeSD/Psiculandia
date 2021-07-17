@@ -2,6 +2,7 @@ package application.main;
 
 import application.repository.inmemory.*;
 import application.repository.sqlite.DatabaseBuilder;
+import application.repository.sqlite.SqliteEmpregadoDAO;
 import application.view.WindowLoader;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
@@ -70,7 +71,7 @@ public class Main {
     }
 
     private static void configureInjection() {
-        EmpregadoDAO empregadoDAO = new InMemoryEmpregadoDAO();
+        EmpregadoDAO empregadoDAO = new SqliteEmpregadoDAO();
         createEmpregadoUseCase = new CreateEmpregadoUseCase(empregadoDAO);
         updateEmpregadoUseCase = new UpdateEmpregadoUseCase(empregadoDAO);
         removeEmpregadoUseCase = new RemoveEmpregadoUseCase(empregadoDAO);

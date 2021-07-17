@@ -26,7 +26,7 @@ public class DatabaseBuilder {
             statement.addBatch(createPeixeTable());
             statement.addBatch(createHistoricoSemanalTable());
             statement.addBatch(createTanqueTable());
-            statement.addBatch(createUsuarioTable());
+            statement.addBatch(createEmpregadoTable());
             statement.addBatch(createVendaTable());
             statement.executeBatch();
 
@@ -92,7 +92,7 @@ public class DatabaseBuilder {
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("dataAtualizacao TEXT NOT NULL, \n");
         builder.append("insumo INTEGER NOT NULL, \n");
-        builder.append("FOREIGN KEY(insumo) REFERENCES Insumo(id)\n");
+        builder.append("FOREIGN KEY(insumo) REFERENCES Insumo(id) \n");
         builder.append("); \n");
 
         System.out.println(builder.toString());
@@ -115,19 +115,6 @@ public class DatabaseBuilder {
         return builder.toString();
     }
 
-    private String createHistoricoSemanalTable() {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append("CREATE TABLE HistoricoSemanal (\n");
-        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
-        builder.append("pesoMedio REAL NOT NULL, \n");
-        builder.append("dataLancada TEXT NOT NULL \n");
-        builder.append("); \n");
-
-        System.out.println(builder.toString());
-        return builder.toString();
-    }
-
     private String createTanqueTable() {
         StringBuilder builder = new StringBuilder();
 
@@ -138,22 +125,36 @@ public class DatabaseBuilder {
         builder.append("precoManutencao REAL NOT NULL, \n");
         builder.append("dataInicio TEXT NOT NULL, \n");
         builder.append("dataFim TEXT NOT NULL, \n");
-        builder.append("checkAlimentado INTEGER NOT NULL, \n");
-        builder.append("historicoSemanal INTEGER NOT NULL, \n");
-        builder.append("FOREIGN KEY(historicoSemanal) REFERENCES HistoricoSemanal(id) \n");
+        builder.append("checkAlimentado INTEGER NOT NULL \n");
         builder.append("); \n");
 
         System.out.println(builder.toString());
         return builder.toString();
     }
 
-    private String createUsuarioTable() {
+    private String createEmpregadoTable() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("CREATE TABLE Usuario (\n");
+        builder.append("CREATE TABLE Empregado (\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("username TEXT NOT NULL UNIQUE, \n");
-        builder.append("senha INTEGER NOT NULL \n");
+        builder.append("senha INTEGER NOT NULL, \n");
+        builder.append("tipo TEXT NOT NULL \n");
+        builder.append("); \n");
+
+        System.out.println(builder.toString());
+        return builder.toString();
+    }
+
+    private String createHistoricoSemanalTable() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("CREATE TABLE HistoricoSemanal (\n");
+        builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
+        builder.append("pesoMedio REAL NOT NULL, \n");
+        builder.append("dataLancada TEXT NOT NULL, \n");
+        builder.append("tanque INTEGER NOT NULL, \n");
+        builder.append("FOREIGN KEY(tanque) REFERENCES Tanque(id) \n");
         builder.append("); \n");
 
         System.out.println(builder.toString());

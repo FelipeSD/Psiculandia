@@ -9,6 +9,12 @@ public class Estoque {
     private String dataAtualizacao;
     private ArrayList<Insumo> insumos = new ArrayList<Insumo>();
 
+    public Estoque(int id, String dataAtualizacao, int insumo) {
+        this.id = id;
+        this.dataAtualizacao = dataAtualizacao;
+
+    }
+
     public int getId() {
         return id;
     }

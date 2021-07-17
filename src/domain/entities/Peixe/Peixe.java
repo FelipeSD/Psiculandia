@@ -16,6 +16,15 @@ public class Peixe {
         this.valorMercado = valorMercado;
     }
 
+    public Peixe(int id, String nome, double pesoIdealVenda, String racaoConsumida, double qtdRacaoDiaria, double valorMercado) {
+        this.id = id;
+        this.nome = nome;
+        this.pesoIdealVenda = pesoIdealVenda;
+        this.racaoConsumida = racaoConsumida;
+        this.qtdRacaoDiaria = qtdRacaoDiaria;
+        this.valorMercado = valorMercado;
+    }
+
     public int getId() {
         return id;
     }

@@ -15,6 +15,14 @@ public class Fornecedor {
         this.nome = nome;
     }
 
+    public Fornecedor(int id, String cnpj, String nome, String endereco, String produtos, int tempoEntrega) {
+        this.id = id;
+        this.cnpj = cnpj;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.tempoEntrega = tempoEntrega;
+    }
+
     public int getId() {
         return id;
     }

@@ -6,13 +6,9 @@ import javafx.scene.control.ButtonType;
 
 import java.util.Optional;
 
-public class ShowAlert {
-    private String title;
-    private String message;
-    private Alert.AlertType type;
-    private AlertCallback callback;
+public abstract class ShowAlert {
 
-    public ShowAlert(String title, String message, Alert.AlertType type, AlertCallback callback) {
+    public static void callback(String title, String message, Alert.AlertType type, AlertCallback callback) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setContentText(message);
@@ -28,7 +24,7 @@ public class ShowAlert {
         }
     }
 
-    public ShowAlert(String title, String message, Alert.AlertType type) {
+    public static void emit(String title, String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setContentText(message);

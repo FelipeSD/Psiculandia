@@ -47,7 +47,7 @@ public class LoginController {
                 if(controller != null) controller.EMPREGADO_Sistema = empregadoLogado;
             }
         } catch (EntityNotFoundException | InvalidPasswordException e) {
-            new ShowAlert(
+            ShowAlert.emit(
                     "Login falhou",
                     e.getMessage(),
                     Alert.AlertType.ERROR

@@ -35,7 +35,7 @@ public class CadastroController implements Initializable {
         String tipo = rbGroupTipo.getSelectedToggle().getUserData().toString();
         boolean retorno = createEmpregadoUseCase.insert(tipo, txtUsername.getText(), txtSenha.getText());
         if(!retorno){
-            new ShowAlert(
+            ShowAlert.emit(
                     "Cadastro falhou",
                     "Verifique as informações e tente novamente",
                     Alert.AlertType.WARNING

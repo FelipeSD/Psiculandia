@@ -94,7 +94,7 @@ public class GerenciarCliente {
         Cliente cliente = this.getSelectedItem();
 
         if(cliente == null){
-            new ShowAlert(
+            ShowAlert.emit(
                     "Não foi possível editar",
                     "Selecione um cliente na tabela para editar.",
                     Alert.AlertType.ERROR
@@ -114,13 +114,13 @@ public class GerenciarCliente {
 
     public void excluir(ActionEvent actionEvent) {
         if(clienteSelecionado == null){
-            new ShowAlert(
+            ShowAlert.emit(
                     "Não foi possível excluir",
                     "Selecione um cliente na tabela para excluir.",
                     Alert.AlertType.ERROR
             );
         }else{
-            new ShowAlert(
+            ShowAlert.callback(
                     "Excluir",
                     "Deseja realmente excluir: " + clienteSelecionado,
                     Alert.AlertType.CONFIRMATION,

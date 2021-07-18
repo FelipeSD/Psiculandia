@@ -113,7 +113,7 @@ public class GerenciarFornecedor implements Initializable {
         Fornecedor fornecedor = this.getSelectedItem();
 
         if(fornecedor == null){
-            new ShowAlert(
+            ShowAlert.emit(
                     "Não foi possível editar",
                     "Selecione um fornecedor na tabela para editar.",
                     Alert.AlertType.ERROR
@@ -133,14 +133,13 @@ public class GerenciarFornecedor implements Initializable {
 
     public void excluir(ActionEvent actionEvent) {
         if(fornecedorSelecionado == null){
-            new ShowAlert(
+            ShowAlert.emit(
                     "Não foi possível excluir",
                     "Selecione um fornecedor na tabela para excluir.",
-                    Alert.AlertType.ERROR,
-                    null
+                    Alert.AlertType.ERROR
             );
         }else{
-            new ShowAlert(
+            ShowAlert.callback(
                     "Excluir",
                     "Deseja realmente excluir: " + fornecedorSelecionado,
                     Alert.AlertType.CONFIRMATION,

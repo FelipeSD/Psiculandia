@@ -1,7 +1,7 @@
 package application.controller;
 
 import domain.entities.Cliente.Cliente;
-import domain.entities.Fornecedor.Fornecedor;
+import domain.utils.ShowAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,7 +11,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 
 import java.util.List;
-import java.util.Optional;
 
 import static application.main.Main.*;
 
@@ -20,8 +19,8 @@ public class GerenciarCliente {
     public Button btnEditar;
     public Button btnExcluir;
     public TableView<Cliente> tableViewCliente;
-    public TableColumn cNome;
-    public TableColumn cCNPJ;
+    public TableColumn<Cliente, String> cNome;
+    public TableColumn<Cliente, String> cCNPJ;
     public FlowPane formularioPane;
     public TextField txtNome;
     public TextField txtCNPJ;
@@ -95,11 +94,10 @@ public class GerenciarCliente {
         Cliente cliente = this.getSelectedItem();
 
         if(cliente == null){
-            showAlert(
+            new ShowAlert(
                     "Não foi possível editar",
                     "Selecione um cliente na tabela para editar.",
-                    Alert.AlertType.ERROR,
-                    null
+                    Alert.AlertType.ERROR
             );
         }else{
             habilitarFormulario();
@@ -116,14 +114,13 @@ public class GerenciarCliente {
 
     public void excluir(ActionEvent actionEvent) {
         if(clienteSelecionado == null){
-            showAlert(
+            new ShowAlert(
                     "Não foi possível excluir",
                     "Selecione um cliente na tabela para excluir.",
-                    Alert.AlertType.ERROR,
-                    null
+                    Alert.AlertType.ERROR
             );
         }else{
-            showAlert(
+            new ShowAlert(
                     "Excluir",
                     "Deseja realmente excluir: " + clienteSelecionado,
                     Alert.AlertType.CONFIRMATION,
@@ -187,26 +184,5 @@ public class GerenciarCliente {
         cCNPJ.setCellValueFactory(new PropertyValueFactory<Cliente, String>("cnpj"));
 //        cEndereco.setCellValueFactory(new PropertyValueFactory<Cliente, String>("endereco"));
 //        cTempoEntrega.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("tempoEntrega"));
-    }
-
-    private void showAlert(
-            String title,
-            String message,
-            Alert.AlertType type,
-            AlertCallback callback
-    ){
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.setHeaderText(null);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if(callback != null && result.isPresent()){
-            if(result.get() == ButtonType.OK) {
-                callback.onConfirm();
-            }else if (result.get() == ButtonType.CANCEL){
-                callback.onCancel();
-            }
-        }
     }
 }

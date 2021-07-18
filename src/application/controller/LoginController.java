@@ -3,6 +3,7 @@ package application.controller;
 import domain.entities.Usuario.Empregado;
 import domain.utils.EntityNotFoundException;
 import domain.utils.InvalidPasswordException;
+import domain.utils.ShowAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,11 +47,11 @@ public class LoginController {
                 if(controller != null) controller.EMPREGADO_Sistema = empregadoLogado;
             }
         } catch (EntityNotFoundException | InvalidPasswordException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Login falhou");
-            alert.setContentText(e.getMessage());
-
-            alert.showAndWait();
+            new ShowAlert(
+                    "Login falhou",
+                    e.getMessage(),
+                    Alert.AlertType.ERROR
+            );
         }
     }
 

@@ -1,6 +1,7 @@
 package application.controller;
 
 import domain.entities.Fornecedor.Fornecedor;
+import domain.utils.ShowAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -112,11 +113,10 @@ public class GerenciarFornecedor implements Initializable {
         Fornecedor fornecedor = this.getSelectedItem();
 
         if(fornecedor == null){
-            showAlert(
+            new ShowAlert(
                     "Não foi possível editar",
                     "Selecione um fornecedor na tabela para editar.",
-                    Alert.AlertType.ERROR,
-                    null
+                    Alert.AlertType.ERROR
             );
         }else{
             habilitarFormulario();
@@ -133,14 +133,14 @@ public class GerenciarFornecedor implements Initializable {
 
     public void excluir(ActionEvent actionEvent) {
         if(fornecedorSelecionado == null){
-            showAlert(
+            new ShowAlert(
                     "Não foi possível excluir",
                     "Selecione um fornecedor na tabela para excluir.",
                     Alert.AlertType.ERROR,
                     null
             );
         }else{
-            showAlert(
+            new ShowAlert(
                     "Excluir",
                     "Deseja realmente excluir: " + fornecedorSelecionado,
                     Alert.AlertType.CONFIRMATION,
@@ -205,26 +205,5 @@ public class GerenciarFornecedor implements Initializable {
         cCNPJ.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("cnpj"));
         cEndereco.setCellValueFactory(new PropertyValueFactory<Fornecedor, String>("endereco"));
         cTempoEntrega.setCellValueFactory(new PropertyValueFactory<Fornecedor, Integer>("tempoEntrega"));
-    }
-
-    private void showAlert(
-            String title,
-            String message,
-            Alert.AlertType type,
-            AlertCallback callback
-    ){
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setContentText(message);
-        alert.setHeaderText(null);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        if(callback != null && result.isPresent()){
-            if(result.get() == ButtonType.OK) {
-                callback.onConfirm();
-            }else if (result.get() == ButtonType.CANCEL){
-                callback.onCancel();
-            }
-        }
     }
 }

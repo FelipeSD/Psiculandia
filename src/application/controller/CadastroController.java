@@ -1,5 +1,6 @@
 package application.controller;
 
+import domain.utils.ShowAlert;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,12 +35,11 @@ public class CadastroController implements Initializable {
         String tipo = rbGroupTipo.getSelectedToggle().getUserData().toString();
         boolean retorno = createEmpregadoUseCase.insert(tipo, txtUsername.getText(), txtSenha.getText());
         if(!retorno){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Cadastro falhou");
-            alert.setHeaderText("Não foi possível cadastrar");
-            alert.setContentText("Verifique as informações e tente novamente");
-
-            alert.showAndWait();
+            new ShowAlert(
+                    "Cadastro falhou",
+                    "Verifique as informações e tente novamente",
+                    Alert.AlertType.WARNING
+            );
         }else{
             abrirLogin(actionEvent);
         }

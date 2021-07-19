@@ -30,7 +30,6 @@ public class MainUIController implements Initializable {
     }
     
     public void abrirFXML(ActionEvent mouseEvent) throws IOException {
-        System.out.println("abrir EMPREGADO_Sistema = " + EMPREGADO_Sistema);
         Button clickedButton = (Button) mouseEvent.getSource();
         String fxmlName = clickedButton.getId();
         Parent newLoadedPane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/resources/" +fxmlName+".fxml")));

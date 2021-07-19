@@ -58,8 +58,8 @@ public class DatabaseBuilder {
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("cnpj TEXT NOT NULL UNIQUE, \n");
         builder.append("nome TEXT NOT NULL, \n");
-        builder.append("endereco TEXT NOT NULL UNIQUE, \n");
-        builder.append("produtos TEXT NOT NULL, \n");
+        builder.append("endereco TEXT, \n");
+//        builder.append("produtos TEXT, \n");
         builder.append("tempoEntrega INTEGER NOT NULL \n");
         builder.append("); \n");
 

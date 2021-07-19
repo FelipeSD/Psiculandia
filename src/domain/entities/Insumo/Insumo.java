@@ -34,6 +34,10 @@ public class Insumo {
 //        this.fornecedor = fornecedor;
     }
 
+    public Insumo() {
+
+    }
+
     public int getId() {
         return id;
     }

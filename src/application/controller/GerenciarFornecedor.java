@@ -54,7 +54,6 @@ public class GerenciarFornecedor implements Initializable {
 
     public void bindOnSelectEvent(){
         tableViewFornecedor.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            System.out.println("obs + oldSelection + newSelection = " + obs + oldSelection + newSelection);
             fornecedorSelecionado = newSelection;
         });
     }

@@ -15,7 +15,7 @@ public class Fornecedor {
         this.nome = nome;
     }
 
-    public Fornecedor(int id, String cnpj, String nome, String endereco, String produtos, int tempoEntrega) {
+    public Fornecedor(int id, String cnpj, String nome, String endereco, int tempoEntrega) {
         this.id = id;
         this.cnpj = cnpj;
         this.nome = nome;

@@ -5,16 +5,19 @@ import domain.utils.ShowAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.FlowPane;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static application.main.Main.*;
 
-public class GerenciarCliente {
+public class GerenciarCliente implements Initializable {
     public Button btnAdicionar;
     public Button btnEditar;
     public Button btnExcluir;
@@ -32,6 +35,15 @@ public class GerenciarCliente {
     private ObservableList<Cliente> clientes;
 
     private Cliente clienteSelecionado;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        bindTableViewToItemsList();
+        associarValoresComColunas();
+        desabilitarFormulario();
+        carregarDadosEExibir();
+        bindOnSelectEvent();
+    }
 
     public void bindOnSelectEvent(){
         tableViewCliente.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -108,8 +120,8 @@ public class GerenciarCliente {
     private void preencherDadosCliente() {
         txtNome.setText(clienteSelecionado.getNome());
         txtCNPJ.setText(clienteSelecionado.getCnpj());
-//        txtEndereco.setText(clienteSelecionado.getEndereco());
-//        txtTempoEntrega.setText(String.valueOf(clienteSelecionado.getTempoEntrega()));
+        txtEndereco.setText(clienteSelecionado.getEmail());
+        txtTelefone.setText(String.valueOf(clienteSelecionado.getTelefone()));
     }
 
     public void excluir(ActionEvent actionEvent) {
@@ -169,7 +181,8 @@ public class GerenciarCliente {
 
         clienteSelecionado.setNome(txtNome.getText());
         clienteSelecionado.setCnpj(txtCNPJ.getText());
-        // coletar informações cliente do formulario
+        clienteSelecionado.setEmail(txtEndereco.getText());
+        clienteSelecionado.setTelefone(txtTelefone.getText());
 
         return clienteSelecionado;
     }
@@ -182,7 +195,5 @@ public class GerenciarCliente {
     public void associarValoresComColunas(){
         cNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("nome"));
         cCNPJ.setCellValueFactory(new PropertyValueFactory<Cliente, String>("cnpj"));
-//        cEndereco.setCellValueFactory(new PropertyValueFactory<Cliente, String>("endereco"));
-//        cTempoEntrega.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("tempoEntrega"));
     }
 }

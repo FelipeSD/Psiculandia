@@ -6,6 +6,7 @@ import domain.usecases.Fornecedor.FornecedorDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,15 +14,15 @@ public class SqliteFornecedorDAO implements FornecedorDAO {
 
     @Override
     public Integer create(Fornecedor fornecedor) {
-        String sql = "INSERT INTO Fornecedor(cnpj, nome, endereco, produtos, tempoEntrega) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Fornecedor(cnpj, nome, endereco, tempoEntrega) " +
+                "VALUES (?, ?, ?, ?)";
 
         try(PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)){
             stmt.setString(1, fornecedor.getCnpj());
             stmt.setString(2, fornecedor.getNome());
             stmt.setString(3, fornecedor.getEndereco());
 //            stmt.setString(4, fornecedor.getProdutos());
-            stmt.setInt(5, fornecedor.getTempoEntrega());
+            stmt.setInt(4, fornecedor.getTempoEntrega());
             stmt.execute();
 
             ResultSet resultSet = stmt.getGeneratedKeys();
@@ -52,7 +53,19 @@ public class SqliteFornecedorDAO implements FornecedorDAO {
 
     @Override
     public List<Fornecedor> findAll() {
-        return null;
+        List<Fornecedor> fornecedores = new ArrayList<>();
+        String sql = "SELECT * FROM Fornecedor";
+
+        try (PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)) {
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                Fornecedor fornecedor = resultSetToEntity(resultSet);
+                fornecedores.add(fornecedor);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return fornecedores;
     }
 
     private Fornecedor resultSetToEntity(ResultSet rs) throws SQLException {
@@ -61,7 +74,7 @@ public class SqliteFornecedorDAO implements FornecedorDAO {
                 rs.getString("cnpj"),
                 rs.getString("nome"),
                 rs.getString("endereco"),
-                rs.getString("produtos"),
+//                rs.getString("produtos"),
                 rs.getInt("tempoEntrega")
         );
     }
@@ -88,7 +101,7 @@ public class SqliteFornecedorDAO implements FornecedorDAO {
 
     @Override
     public boolean update(Fornecedor fornecedor) {
-        String sql = "UPDATE Fornecedor SET cnpj = ?, nome = ?, endereco = ?, produtos = ?, " +
+        String sql = "UPDATE Fornecedor SET cnpj = ?, nome = ?, endereco = ?, " +
                 "tempoEntrega = ? WHERE id = ?";
 
         try(PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)){
@@ -96,7 +109,8 @@ public class SqliteFornecedorDAO implements FornecedorDAO {
             stmt.setString(2, fornecedor.getNome());
             stmt.setString(3, fornecedor.getEndereco());
 //            stmt.setString(4, fornecedor.getProdutos());
-            stmt.setInt(5, fornecedor.getTempoEntrega());
+            stmt.setInt(4, fornecedor.getTempoEntrega());
+            stmt.setInt(5, fornecedor.getId());
             stmt.execute();
 
             return true;

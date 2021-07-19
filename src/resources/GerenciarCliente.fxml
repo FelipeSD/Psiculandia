@@ -42,8 +42,8 @@
          <children>
             <TextField fx:id="txtNome" prefHeight="25.0" prefWidth="351.0" promptText="Nome" />
             <TextField fx:id="txtCNPJ" prefHeight="25.0" prefWidth="275.0" promptText="CNPJ" />
-            <TextField fx:id="txtEndereco" prefHeight="25.0" prefWidth="377.0" promptText="Endereço" />
-            <TextField fx:id="txtTelefone" prefHeight="25.0" prefWidth="251.0" promptText="Telefone" />
+            <TextField fx:id="txtEndereco" prefHeight="25.0" prefWidth="353.0" promptText="Email" />
+            <TextField fx:id="txtTelefone" prefHeight="25.0" prefWidth="275.0" promptText="Telefone" />
             <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="638.0" spacing="10.0">
                <children>
                   <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvar" text="Salvar" />

@@ -2,7 +2,9 @@ package application.main;
 
 import application.repository.inmemory.*;
 import application.repository.sqlite.DatabaseBuilder;
+import application.repository.sqlite.SqliteClienteDAO;
 import application.repository.sqlite.SqliteEmpregadoDAO;
+import application.repository.sqlite.SqliteFornecedorDAO;
 import application.view.WindowLoader;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
@@ -94,13 +96,13 @@ public class Main {
         registrarAdministracaoDiariaRacaoUseCase = new RegistrarAdministracaoDiariaRacaoUseCase(tanqueDAO);
         previsaoVendaPeixeUseCase = new PrevisaoVendaPeixeUseCase(tanqueDAO, peixeDAO);
 
-        ClienteDAO clienteDAO = new InMemoryClienteDAO();
+        ClienteDAO clienteDAO = new SqliteClienteDAO();
         createClienteUseCase = new CreateClienteUseCase(clienteDAO);
         updateClienteUseCase = new UpdateClienteUseCase(clienteDAO);
         removeClienteUseCase = new RemoveClienteUseCase(clienteDAO);
         findClienteUseCase = new FindClienteUseCase(clienteDAO);
 
-        FornecedorDAO fornecedorDAO = new InMemoryFornecedorDAO();
+        FornecedorDAO fornecedorDAO = new SqliteFornecedorDAO();
         createFornecedorUseCase = new CreateFornecedorUseCase(fornecedorDAO);
         updateFornecedorUseCase = new UpdateFornecedorUseCase(fornecedorDAO);
         removeFornecedorUseCase = new RemoveFornecedorUseCase(fornecedorDAO);

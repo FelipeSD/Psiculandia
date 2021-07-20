@@ -43,8 +43,9 @@
          <children>
             <TextField fx:id="txtEspecie" prefHeight="25.0" prefWidth="351.0" promptText="Espécie" />
             <TextField fx:id="txtPesoVenda" prefHeight="25.0" prefWidth="275.0" promptText="Peso venda" />
-            <ComboBox fx:id="cbRacaoConsumida" prefHeight="25.0" prefWidth="239.0" promptText="Ração consumida" />
-            <TextField fx:id="txtQuantidadeRacaoDiaria" prefHeight="25.0" prefWidth="179.0" promptText="Quantidade Ração Diária (g)" />
+            <TextField fx:id="txtValorMercado" prefHeight="25.0" prefWidth="353.0" promptText="Valor mercado" />
+            <ComboBox fx:id="cbRacaoConsumida" prefHeight="25.0" prefWidth="275.0" promptText="Ração consumida" />
+            <TextField fx:id="txtQuantidadeRacaoDiaria" prefHeight="25.0" prefWidth="354.0" promptText="Quantidade Ração Diária (g)" />
             <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="638.0" spacing="10.0">
                <children>
                   <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvar" text="Salvar" />

@@ -8,11 +8,13 @@ import java.util.Optional;
 
 public class FindInsumoUseCase {
     private final InsumoDAO insumoDAO;
-    private final EstoqueDAO estoqueDAO;
+//    private final EstoqueDAO estoqueDAO;
 
-    public FindInsumoUseCase(InsumoDAO insumoDAO, EstoqueDAO estoqueDAO) {
+    public FindInsumoUseCase(InsumoDAO insumoDAO
+//            , EstoqueDAO estoqueDAO
+    ) {
         this.insumoDAO = insumoDAO;
-        this.estoqueDAO = estoqueDAO;
+//        this.estoqueDAO = estoqueDAO;
     }
 
     public Optional<Insumo> findOne(Integer id){

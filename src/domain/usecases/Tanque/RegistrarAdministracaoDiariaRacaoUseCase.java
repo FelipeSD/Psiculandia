@@ -34,14 +34,14 @@ public class RegistrarAdministracaoDiariaRacaoUseCase {
 
         Optional<Peixe> peixeInMemory = peixeDAO.findByEspecie(especie);
         Peixe peixeEncontrado = peixeInMemory.get();
-        String racao = peixeEncontrado.getRacaoConsumida();
+        Insumo racao = peixeEncontrado.getRacaoConsumida();
         double qtdeRacao = peixeEncontrado.getQtdRacaoDiaria();
 
         ArrayList<Insumo> listaInsumos = estoque.listarInsumos();
 
         if(!listaInsumos.isEmpty()){
             for(Insumo insumoEstoque : listaInsumos){
-                if(insumoEstoque.getNome().equals(racao)){
+                if(insumoEstoque.getNome().equals(racao.getNome())){
                     double valorInsumo = insumoEstoque.getValor();
                     double qtde = quantidadePeixe*qtdeRacao;
                     double quantidadeFinal = insumoEstoque.getQtde() - qtde;

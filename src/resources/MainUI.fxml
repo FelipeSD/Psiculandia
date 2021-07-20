@@ -122,20 +122,6 @@
                               </HBox>
                            </graphic>
                         </Button>
-                        <Button id="GerenciarInsumo" fx:id="btnGerenciarInsumo" mnemonicParsing="false" onAction="#abrirFXML" style="-fx-background-color: transparent;">
-                           <graphic>
-                              <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">
-                                 <children>
-                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../assets/icon/fish-food(1).png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gerenciar Insumo" textOrigin="CENTER" />
-                                 </children>
-                              </HBox>
-                           </graphic>
-                        </Button>
                         <Button id="GerenciarEstoque" fx:id="btnGerenciarEstoque" mnemonicParsing="false" onAction="#abrirFXML" style="-fx-background-color: transparent;">
                            <graphic>
                               <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="188.0" spacing="10.0">

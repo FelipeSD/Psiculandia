@@ -7,22 +7,18 @@ import domain.utils.EntityNotFoundException;
 
 public class UpdateInsumoUseCase {
     private final InsumoDAO insumoDAO;
-    private final EstoqueDAO estoqueDAO;
 
-    public UpdateInsumoUseCase(InsumoDAO insumoDAO, EstoqueDAO estoqueDAO) {
+    public UpdateInsumoUseCase(InsumoDAO insumoDAO) {
         this.insumoDAO = insumoDAO;
-        this.estoqueDAO = estoqueDAO;
     }
 
-    public boolean update(Insumo insumo, Estoque estoque){
+    public boolean update(Insumo insumo){
         int id = insumo.getId();
         if(insumoDAO.findOne(id).isEmpty()){
             throw new EntityNotFoundException("Insumo não encontrado.");
         }
 
         insumoDAO.update(insumo);
-        estoque.atualizarInsumo(insumo);
-        estoqueDAO.update(estoque);
         return true;
     }
 }

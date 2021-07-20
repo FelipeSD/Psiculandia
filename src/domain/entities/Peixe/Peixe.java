@@ -1,14 +1,16 @@
 package domain.entities.Peixe;
 
+import domain.entities.Insumo.Insumo;
+
 public class Peixe {
     private int id;
     private String nome;
     private double pesoIdealVenda;
-    private String racaoConsumida;
+    private Insumo racaoConsumida;
     private double qtdRacaoDiaria;
     private double valorMercado;
 
-    public Peixe(String nome, double pesoIdealVenda, String racaoConsumida, double qtdRacaoDiaria, double valorMercado) {
+    public Peixe(String nome, double pesoIdealVenda, Insumo racaoConsumida, double qtdRacaoDiaria, double valorMercado) {
         this.nome = nome;
         this.pesoIdealVenda = pesoIdealVenda;
         this.racaoConsumida = racaoConsumida;
@@ -16,13 +18,17 @@ public class Peixe {
         this.valorMercado = valorMercado;
     }
 
-    public Peixe(int id, String nome, double pesoIdealVenda, String racaoConsumida, double qtdRacaoDiaria, double valorMercado) {
+    public Peixe(int id, String nome, double pesoIdealVenda, Insumo racaoConsumida, double qtdRacaoDiaria, double valorMercado) {
         this.id = id;
         this.nome = nome;
         this.pesoIdealVenda = pesoIdealVenda;
         this.racaoConsumida = racaoConsumida;
         this.qtdRacaoDiaria = qtdRacaoDiaria;
         this.valorMercado = valorMercado;
+    }
+
+    public Peixe() {
+
     }
 
     public int getId() {
@@ -49,11 +55,11 @@ public class Peixe {
         this.pesoIdealVenda = pesoIdealVenda;
     }
 
-    public String getRacaoConsumida() {
+    public Insumo getRacaoConsumida() {
         return racaoConsumida;
     }
 
-    public void setRacaoConsumida(String racaoConsumida) {
+    public void setRacaoConsumida(Insumo racaoConsumida) {
         this.racaoConsumida = racaoConsumida;
     }
 

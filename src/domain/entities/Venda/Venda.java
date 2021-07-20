@@ -12,6 +12,15 @@ public class Venda {
     private double valor;
     private Cliente cliente;
 
+    public Venda(int id, Date data, String peixeVendido, double qtde, double valor, Cliente cliente) {
+        this.id = id;
+        this.data = data;
+        this.peixeVendido = peixeVendido;
+        this.qtde = qtde;
+        this.valor = valor;
+        this.cliente = cliente;
+    }
+
     public Venda(String peixeVendido, double qtde, double valor) {
         this.peixeVendido = peixeVendido;
         this.qtde = qtde;
@@ -32,6 +41,10 @@ public class Venda {
         this.peixeVendido = peixeVendido;
         this.qtde = qtde;
         this.valor = valor;
+    }
+
+    public Venda() {
+
     }
 
     public Cliente getCliente() {

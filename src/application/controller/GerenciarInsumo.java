@@ -28,10 +28,12 @@ public class GerenciarInsumo implements Initializable {
     public TableColumn<Insumo, String> cNome;
     public TableColumn<Insumo, Fornecedor> cFornecedor;
     public TableColumn<Insumo, Double> cValor;
+    public TableColumn<Insumo, Double> cQuantidade;
     public FlowPane formularioPane;
     public TextField txtNome;
     public TextField txtQuantidade;
     public TextField txtValor;
+    public TextField txtTipo;
     public ComboBox<Fornecedor> cbFornecedor;
     public Button btnSalvar;
     public Button btnCancelar;
@@ -72,7 +74,6 @@ public class GerenciarInsumo implements Initializable {
                 ((TextInputControl)node).setText("");
             }else if(node instanceof ComboBox){
                 ((ComboBox<Fornecedor>)node).setValue(null);
-//                ((ComboBox<Fornecedor>)node).getSelectionModel().clearSelection();
             }
         }
 
@@ -128,6 +129,7 @@ public class GerenciarInsumo implements Initializable {
         txtNome.setText(insumoSelecionado.getNome());
         txtQuantidade.setText(String.valueOf(insumoSelecionado.getQtde()));
         txtValor.setText(String.valueOf(insumoSelecionado.getValor()));
+        txtTipo.setText(insumoSelecionado.getTipo());
         cbFornecedor.setValue(insumoSelecionado.getFornecedor());
     }
 
@@ -146,7 +148,7 @@ public class GerenciarInsumo implements Initializable {
                     new AlertCallback() {
                         @Override
                         public void onConfirm() {
-//                            removeInsumoUseCase.remove(insumoSelecionado);
+                            removeInsumoUseCase.remove(insumoSelecionado);
                             carregarDadosEExibir();
                         }
 
@@ -163,9 +165,9 @@ public class GerenciarInsumo implements Initializable {
         insumoSelecionado = obterInsumoFormulario();
 
         if (insumoSelecionado.getId() == 0) {
-//            createInsumoUseCase.insert(insumoSelecionado);
+            createInsumoUseCase.insert(insumoSelecionado);
         } else {
-//            updateInsumoUseCase.update(insumoSelecionado);
+            updateInsumoUseCase.update(insumoSelecionado);
         }
 
         carregarDadosEExibir();
@@ -196,6 +198,7 @@ public class GerenciarInsumo implements Initializable {
         insumoSelecionado.setFornecedor(cbFornecedor.getValue());
         insumoSelecionado.setValor(Double.parseDouble(txtValor.getText()));
         insumoSelecionado.setQtde(Double.parseDouble(txtQuantidade.getText()));
+        insumoSelecionado.setTipo(txtTipo.getText());
 
         return insumoSelecionado;
     }
@@ -209,5 +212,6 @@ public class GerenciarInsumo implements Initializable {
         cNome.setCellValueFactory(new PropertyValueFactory<Insumo, String>("nome"));
         cFornecedor.setCellValueFactory(new PropertyValueFactory<Insumo, Fornecedor>("fornecedor"));
         cValor.setCellValueFactory(new PropertyValueFactory<Insumo, Double>("valor"));
+        cQuantidade.setCellValueFactory(new PropertyValueFactory<Insumo, Double>("qtde"));
     }
 }

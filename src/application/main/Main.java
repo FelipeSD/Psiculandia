@@ -1,11 +1,9 @@
 package application.main;
 
 import application.repository.inmemory.*;
-import application.repository.sqlite.DatabaseBuilder;
-import application.repository.sqlite.SqliteClienteDAO;
-import application.repository.sqlite.SqliteEmpregadoDAO;
-import application.repository.sqlite.SqliteFornecedorDAO;
+import application.repository.sqlite.*;
 import application.view.WindowLoader;
+import domain.entities.Estoque.Estoque;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
 import domain.usecases.Fornecedor.*;
@@ -80,7 +78,7 @@ public class Main {
         findEmpregadoUseCase = new FindEmpregadoUseCase(empregadoDAO);
         loginEmpregadoUseCase = new LoginEmpregadoUseCase(empregadoDAO);
 
-        PeixeDAO peixeDAO = new InMemoryPeixeDAO();
+        PeixeDAO peixeDAO = new SqlitePeixeDAO();
         createPeixeUseCase = new CreatePeixeUseCase(peixeDAO);
         updatePeixeUseCase = new UpdatePeixeUseCase(peixeDAO);
         removePeixeUseCase = new RemovePeixeUseCase(peixeDAO);
@@ -108,20 +106,20 @@ public class Main {
         removeFornecedorUseCase = new RemoveFornecedorUseCase(fornecedorDAO);
         findFornecedorUseCase = new FindFornecedorUseCase(fornecedorDAO);
 
-        EstoqueDAO estoqueDAO = new InMemoryEstoqueDAO();
+        EstoqueDAO estoqueDAO = new SqliteEstoqueDAO();
         createEstoqueUseCase = new CreateEstoqueUseCase(estoqueDAO);
         updateEstoqueUseCase = new UpdateEstoqueUseCase(estoqueDAO);
         removeEstoqueUseCase = new RemoveEstoqueUseCase(estoqueDAO);
         findEstoqueUseCase = new FindEstoqueUseCase(estoqueDAO);
 
-        InsumoDAO insumoDAO = new InMemoryInsumoDAO();
-        createInsumoUseCase = new CreateInsumoUseCase(insumoDAO, estoqueDAO);
-        updateInsumoUseCase = new UpdateInsumoUseCase(insumoDAO, estoqueDAO);
-        removeInsumoUseCase = new RemoveInsumoUseCase(insumoDAO, estoqueDAO);
-        findInsumoUseCase = new FindInsumoUseCase(insumoDAO, estoqueDAO);
+        InsumoDAO insumoDAO = new SqliteInsumoDAO();
+        createInsumoUseCase = new CreateInsumoUseCase(insumoDAO);
+        updateInsumoUseCase = new UpdateInsumoUseCase(insumoDAO);
+        removeInsumoUseCase = new RemoveInsumoUseCase(insumoDAO);
+        findInsumoUseCase = new FindInsumoUseCase(insumoDAO);
         previsaoRepoeEstoqueUseCase = new PrevisaoRepoeEstoqueUseCase(peixeDAO, tanqueDAO);
 
-        VendaDAO vendaDAO = new InMemoryVendaDAO();
+        VendaDAO vendaDAO = new SqliteVendaDAO();
         createVendaUseCase = new CreateVendaUseCase(vendaDAO);
         updateVendaUseCase = new UpdateVendaUseCase(vendaDAO);
         removeVendaUseCase = new RemoveVendaUseCase(vendaDAO);

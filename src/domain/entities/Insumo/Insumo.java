@@ -24,14 +24,14 @@ public class Insumo {
         this.fornecedor = fornecedor;
     }
 
-    public Insumo(int id, String nome, String tipo, double qtde, double valor, String dataAquisicao, int fornecedor) {
+    public Insumo(int id, String nome, String tipo, double qtde, double valor, String dataAquisicao, Fornecedor fornecedor) {
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.qtde = qtde;
         this.valor = valor;
         this.dataAquisicao = dataAquisicao;
-//        this.fornecedor = fornecedor;
+        this.fornecedor = fornecedor;
     }
 
     public Insumo() {

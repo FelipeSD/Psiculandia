@@ -7,11 +7,13 @@ import domain.utils.EntityNotFoundException;
 
 public class RemoveInsumoUseCase {
     private final InsumoDAO insumoDAO;
-    private final EstoqueDAO estoqueDAO;
+//    private final EstoqueDAO estoqueDAO;
 
-    public RemoveInsumoUseCase(InsumoDAO insumoDAO, EstoqueDAO estoqueDAO) {
+    public RemoveInsumoUseCase(InsumoDAO insumoDAO
+//            , EstoqueDAO estoqueDAO
+    ) {
         this.insumoDAO = insumoDAO;
-        this.estoqueDAO = estoqueDAO;
+//        this.estoqueDAO = estoqueDAO;
     }
 
     public boolean remove(Integer id){
@@ -22,13 +24,15 @@ public class RemoveInsumoUseCase {
         return true;
     }
 
-    public boolean remove(Insumo insumo, Estoque estoque){
+    public boolean remove(Insumo insumo
+//            , Estoque estoque
+    ){
         if(insumo == null || insumoDAO.findOne(insumo.getId()).isEmpty())
             throw new EntityNotFoundException("Insumo não encontrado.");
 
         insumoDAO.delete(insumo);
-        estoque.removerInsumo(insumo);
-        estoqueDAO.update(estoque);
+//        estoque.removerInsumo(insumo);
+//        estoqueDAO.update(estoque);
         return true;
     }
 }

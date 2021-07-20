@@ -30,15 +30,15 @@ public class PrevisaoRepoeEstoqueUseCase {
         Peixe peixeEncontrado = peixeInMemory.get();
 
         double qtdPeixe = tanque.getQtdAlevinos();
-        String insumoPeixe = peixeEncontrado.getRacaoConsumida();
-        double qtdeRacaoAdminsitrada = peixeEncontrado.getQtdRacaoDiaria()*qtdPeixe;
+        Insumo insumoPeixe = peixeEncontrado.getRacaoConsumida();
+        double qtdeRacaoAdministrada = peixeEncontrado.getQtdRacaoDiaria()*qtdPeixe;
 
         for(Insumo insumoEstoque : estoque.listarInsumos()){
-            if(insumoEstoque.getNome().equals(insumoPeixe)){
+            if(insumoEstoque.getNome().equals(insumoPeixe.getNome())){
                 double qtdeInsumoEstoque = insumoEstoque.getQtde();
                 double tempoEntregaFornecedor = insumoEstoque.getFornecedor().getTempoEntrega();
 
-                double diaIdealCompra = (qtdeInsumoEstoque/qtdeRacaoAdminsitrada) - tempoEntregaFornecedor;
+                double diaIdealCompra = (qtdeInsumoEstoque/qtdeRacaoAdministrada) - tempoEntregaFornecedor;
                 System.out.println("Levando em consideração o tempo de entrega do fornecedor, é recomendado o abastecimento do estoque em " + diaIdealCompra + " dia(s).");
                 return diaIdealCompra;
             }

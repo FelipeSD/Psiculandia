@@ -76,7 +76,7 @@ public class DatabaseBuilder {
         builder.append("tipo TEXT NOT NULL, \n");
         builder.append("qtde REAL NOT NULL, \n");
         builder.append("valor REAL NOT NULL, \n");
-        builder.append("dataAquisicao TEXT NOT NULL, \n");
+        builder.append("dataAquisicao TEXT, \n");
         builder.append("fornecedor INTEGER NOT NULL, \n");
         builder.append("FOREIGN KEY(fornecedor) REFERENCES Fornecedor(id) \n");
         builder.append("); \n");
@@ -106,9 +106,10 @@ public class DatabaseBuilder {
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("nome TEXT NOT NULL, \n");
         builder.append("pesoIdealVenda REAL NOT NULL, \n");
-        builder.append("racaoConsumida TEXT NOT NULL, \n");
+        builder.append("racaoConsumida INTEGER NOT NULL, \n");
         builder.append("qtdRacaoDiaria REAL NOT NULL, \n");
-        builder.append("valorMercado REAL NOT NULL \n");
+        builder.append("valorMercado REAL NOT NULL, \n");
+        builder.append("FOREIGN KEY(racaoConsumida) REFERENCES Insumo(id) \n");
         builder.append("); \n");
 
         System.out.println(builder.toString());
@@ -120,12 +121,13 @@ public class DatabaseBuilder {
 
         builder.append("CREATE TABLE Tanque (\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
-        builder.append("especieCriada TEXT NOT NULL, \n");
+        builder.append("especieCriada INTEGER NOT NULL, \n");
         builder.append("qtdAlevinos INTEGER NOT NULL, \n");
         builder.append("precoManutencao REAL NOT NULL, \n");
         builder.append("dataInicio TEXT NOT NULL, \n");
         builder.append("dataFim TEXT NOT NULL, \n");
-        builder.append("checkAlimentado INTEGER NOT NULL \n");
+        builder.append("checkAlimentado INTEGER NOT NULL, \n");
+        builder.append("FOREIGN KEY(especieCriada) REFERENCES Peixe(id) \n");
         builder.append("); \n");
 
         System.out.println(builder.toString());
@@ -167,11 +169,12 @@ public class DatabaseBuilder {
         builder.append("CREATE TABLE Venda (\n");
         builder.append("id INTEGER PRIMARY KEY AUTOINCREMENT, \n");
         builder.append("data TEXT NOT NULL, \n");
-        builder.append("peixeVendido TEXT NOT NULL, \n");
+        builder.append("peixeVendido INTEGER NOT NULL, \n");
         builder.append("qtde REAL NOT NULL, \n");
         builder.append("valor REAL NOT NULL, \n");
         builder.append("cliente INTEGER NOT NULL, \n");
-        builder.append("FOREIGN KEY(cliente) REFERENCES Cliente(id) \n");
+        builder.append("FOREIGN KEY(cliente) REFERENCES Cliente(id), \n");
+        builder.append("FOREIGN KEY(peixeVendido) REFERENCES Cliente(id) \n");
         builder.append("); \n");
 
         System.out.println(builder.toString());

@@ -12,6 +12,9 @@ public class Estoque {
     public Estoque(int id, String dataAtualizacao, int insumo) {
         this.id = id;
         this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public Estoque() {
 
     }
 

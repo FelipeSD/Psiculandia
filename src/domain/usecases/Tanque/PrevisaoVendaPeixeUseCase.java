@@ -19,8 +19,8 @@ public class PrevisaoVendaPeixeUseCase {
     }
 
     public double preveVenda(Tanque tanque){
-        int id = tanque.getId();
-        if(tanqueDAO.findOne(id).isEmpty()) {
+            int id = tanque.getId();
+            if(tanqueDAO.findOne(id).isEmpty()) {
             throw new EntityNotFoundException("Tanque não encontrado.");
         }
 

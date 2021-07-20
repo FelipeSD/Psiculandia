@@ -2,6 +2,7 @@ package application.controller;
 
 import domain.entities.Cliente.Cliente;
 import domain.entities.Cliente.Cliente;
+import domain.entities.Peixe.Peixe;
 import domain.entities.Venda.Venda;
 import domain.entities.Venda.Venda;
 import domain.utils.ShowAlert;
@@ -37,6 +38,7 @@ public class GerenciarVenda implements Initializable {
     public TextField txtValor;
     public Button btnSalvar;
     public Button btnCancelar;
+    public ComboBox<Peixe> cbPeixe;
 
     private ObservableList<Venda> vendas;
 
@@ -47,6 +49,7 @@ public class GerenciarVenda implements Initializable {
         bindTableViewToItemsList();
         associarValoresComColunas();
         preencherComboCliente();
+        preencherComboPeixe();
         desabilitarFormulario();
         carregarDadosEExibir();
         bindOnSelectEvent();
@@ -129,6 +132,7 @@ public class GerenciarVenda implements Initializable {
         txtData.setText(String.valueOf(vendaSelecionado.getData()));
         txtValor.setText(String.valueOf(vendaSelecionado.getValor()));
         cbCliente.setValue(vendaSelecionado.getCliente());
+        cbPeixe.setValue(vendaSelecionado.getPeixeVendido());
     }
 
     public void excluir(ActionEvent actionEvent) {
@@ -188,6 +192,12 @@ public class GerenciarVenda implements Initializable {
         cbCliente.getItems().addAll(clienteList);
     }
 
+    private void preencherComboPeixe(){
+        List<Peixe> peixeList = findPeixeUseCase.findAll();
+        cbPeixe.getItems().clear();
+        cbPeixe.getItems().addAll(peixeList);
+    }
+
     private Venda obterVendaFormulario(){
         if(vendaSelecionado == null)
             vendaSelecionado = new Venda();
@@ -196,6 +206,7 @@ public class GerenciarVenda implements Initializable {
             String dataString = txtData.getText();
             Date dataVenda = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
             vendaSelecionado.setCliente(cbCliente.getValue());
+            vendaSelecionado.setPeixeVendido(cbPeixe.getValue());
             vendaSelecionado.setValor(Double.parseDouble(txtValor.getText()));
             vendaSelecionado.setData(dataVenda);
         } catch (ParseException e) {

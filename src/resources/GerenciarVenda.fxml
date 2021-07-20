@@ -42,9 +42,10 @@
       </VBox>
       <FlowPane fx:id="formularioPane" alignment="CENTER" hgap="10.0" layoutX="11.0" layoutY="268.0" prefHeight="108.0" prefWidth="646.0" vgap="10.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <ComboBox fx:id="cbCliente" prefHeight="25.0" prefWidth="248.0" promptText="Cliente" />
-            <TextField fx:id="txtData" prefHeight="25.0" prefWidth="157.0" promptText="Data" />
-            <TextField fx:id="txtValor" prefHeight="25.0" prefWidth="214.0" promptText="Valor" />
+            <ComboBox fx:id="cbCliente" prefHeight="25.0" prefWidth="311.0" promptText="Cliente" />
+            <ComboBox fx:id="cbPeixe" prefHeight="25.0" prefWidth="314.0" promptText="Peixe vendido" />
+            <TextField fx:id="txtData" prefHeight="25.0" prefWidth="314.0" promptText="Data" />
+            <TextField fx:id="txtValor" prefHeight="25.0" prefWidth="308.0" promptText="Valor" />
             <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="638.0" spacing="10.0">
                <children>
                   <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvar" text="Salvar" />

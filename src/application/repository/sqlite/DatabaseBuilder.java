@@ -174,7 +174,7 @@ public class DatabaseBuilder {
         builder.append("valor REAL NOT NULL, \n");
         builder.append("cliente INTEGER NOT NULL, \n");
         builder.append("FOREIGN KEY(cliente) REFERENCES Cliente(id), \n");
-        builder.append("FOREIGN KEY(peixeVendido) REFERENCES Cliente(id) \n");
+        builder.append("FOREIGN KEY(peixeVendido) REFERENCES Peixe(id) \n");
         builder.append("); \n");
 
         System.out.println(builder.toString());

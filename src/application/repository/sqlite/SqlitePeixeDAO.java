@@ -76,7 +76,7 @@ public class SqlitePeixeDAO implements PeixeDAO {
 
     private Peixe resultSetToEntity(ResultSet rs) throws SQLException {
         Optional<Insumo> insumo = findInsumoUseCase.findOne(rs.getInt("racaoConsumida"));
-        
+
         return new Peixe(
                 rs.getInt("id"),
                 rs.getString("nome"),

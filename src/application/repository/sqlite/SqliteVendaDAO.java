@@ -11,13 +11,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static application.main.Main.findClienteUseCase;
-import static application.main.Main.findInsumoUseCase;
+import static application.main.Main.*;
 
 public class SqliteVendaDAO implements VendaDAO {
     @Override
@@ -30,7 +31,7 @@ public class SqliteVendaDAO implements VendaDAO {
 
         try(PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)){
             stmt.setString(1, strDate);
-            stmt.setString(2, venda.getPeixeVendido());
+            stmt.setInt(2, venda.getPeixeVendido().getId());
             stmt.setDouble(3, venda.getQtde());
             stmt.setDouble(4, venda.getValor());
             stmt.setInt(5, venda.getCliente().getId());
@@ -89,7 +90,7 @@ public class SqliteVendaDAO implements VendaDAO {
 
         try(PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)){
             stmt.setString(1, strDate);
-            stmt.setString(2, venda.getPeixeVendido());
+            stmt.setInt(2, venda.getPeixeVendido().getId());
             stmt.setDouble(3, venda.getQtde());
             stmt.setDouble(4, venda.getValor());
             stmt.setInt(5, venda.getCliente().getId());
@@ -118,19 +119,29 @@ public class SqliteVendaDAO implements VendaDAO {
 
     @Override
     public boolean delete(Venda venda) {
-        return false;
+        if (venda == null)
+            throw new IllegalArgumentException("Venda must not be null.");
+        return deleteByKey(venda.getId());
     }
 
     private Venda resultSetToEntity(ResultSet rs) throws SQLException {
         Optional<Cliente> cliente = findClienteUseCase.findOne(rs.getInt("cliente"));
+        Optional<Peixe> peixe = findPeixeUseCase.findOne(rs.getInt("peixeVendido"));
 
+        Date dataVenda = null;
+        try {
+            String dataString = rs.getString("data");
+            dataVenda = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return new Venda(
                 rs.getInt("id"),
-                rs.getString("data"),
-                rs.getDouble("pesoIdealVenda"),
-                cliente.get(),
-                rs.getDouble("qtdRacaoDiaria"),
-                rs.getDouble("valorMercado")
+                dataVenda,
+                peixe.get(),
+                rs.getDouble("qtde"),
+                rs.getDouble("valor"),
+                cliente.get()
         );
     }
 }

@@ -35,8 +35,6 @@ public class Tanque {
         this.checkAlimentado = checkAlimentado == 1;
     }
 
-
-
     public double getPesoMedioInicial() {
         return pesoMedioInicial;
     }

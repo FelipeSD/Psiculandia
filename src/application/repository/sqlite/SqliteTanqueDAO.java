@@ -24,7 +24,7 @@ public class SqliteTanqueDAO implements TanqueDAO {
     @Override
     public Integer create(Tanque tanque) {
         String sql = "INSERT INTO Tanque(especieCriada, qtdAlevinos, precoManutencao, dataInicio, " +
-                "dataFim, pesoMedioInicial, checkAlimentado VALUES (?, ?, ?, ?, ?, ?, ?)";
+                "dataFim, pesoMedioInicial, checkAlimentado) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try(PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)){
             String dateInicio =  DateHelp.dateToString(tanque.getDataInicio());
@@ -130,7 +130,7 @@ public class SqliteTanqueDAO implements TanqueDAO {
     @Override
     public boolean update(Tanque tanque) {
         String sql = "UPDATE Tanque SET especieCriada = ?, qtdAlevinos = ?, precoManutencao = ?, " +
-                "dataInicio = ?, dataFim = ?, pesoMedioIncial = ?, check Alimentado = ? WHERE id = ?";
+                "dataInicio = ?, dataFim = ?, pesoMedioInicial = ?, checkAlimentado = ? WHERE id = ?";
 
         try(PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)){
             String dateInicio =  DateHelp.dateToString(tanque.getDataInicio());
@@ -143,6 +143,7 @@ public class SqliteTanqueDAO implements TanqueDAO {
             stmt.setString(5, dateFim);
             stmt.setDouble(6, tanque.getPesoMedioInicial());
             stmt.setInt(7, tanque.isCheckAlimentado() ? 1 : 0); // tem que ver se está correto esse cast
+            stmt.setInt(8, tanque.getId());
             stmt.execute();
 
             return true;

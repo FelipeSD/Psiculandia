@@ -126,7 +126,7 @@ public class DatabaseBuilder {
         builder.append("precoManutencao REAL NOT NULL, \n");
         builder.append("dataInicio TEXT, \n");
         builder.append("dataFim TEXT, \n");
-        builder.append("pesoMedioIncial REAL, \n");
+        builder.append("pesoMedioInicial REAL, \n");
         builder.append("checkAlimentado INTEGER, \n");
         builder.append("FOREIGN KEY(especieCriada) REFERENCES Peixe(id) \n");
         builder.append("); \n");

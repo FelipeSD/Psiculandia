@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static application.main.Main.*;
-import static application.main.Main.updateFornecedorUseCase;
 
 public class GerenciarTanque implements Initializable {
 
@@ -31,7 +30,7 @@ public class GerenciarTanque implements Initializable {
     public Button btnExcluir;
     public TableView<Tanque> tableViewTanque;
     public TableColumn<Tanque, Peixe> cEspecie;
-    public TableColumn<Tanque, Date> cDataInicio;
+    public TableColumn<Tanque, String> cDataInicio;
     public TableColumn<Tanque, Integer> cQuantidadePeixes;
     public FlowPane formularioPane;
     public ComboBox<Peixe> cbEspecie;
@@ -44,11 +43,12 @@ public class GerenciarTanque implements Initializable {
     public Button btnSalvar;
     public Button btnCancelar;
 
-    public TableColumn<HistoricoSemanalCrescimento, Date> cDataLancada;
+    public TableColumn<HistoricoSemanalCrescimento, String> cDataLancada;
     public TableColumn<HistoricoSemanalCrescimento, Double> cPesoMedio;
     public TableView<HistoricoSemanalCrescimento> tableViewHistoricoSemanal;
     public Button btnSalvarHistorico;
     public Button btnCancelarHistorico;
+    public TextField txtDataFim;
 
     private ObservableList<Tanque> tanques;
 
@@ -90,6 +90,8 @@ public class GerenciarTanque implements Initializable {
         for(Node node : formularioPane.getChildren()){
             if(node instanceof TextInputControl){
                 ((TextInputControl)node).setText("");
+            }else if(node instanceof ComboBox){
+                ((ComboBox<Fornecedor>)node).setValue(null);
             }
         }
 
@@ -144,10 +146,13 @@ public class GerenciarTanque implements Initializable {
     // PRECISA DOS NOMES CORRETOS DOS ITEMS DO VIEW
     private void preencherDadosTanque() {
         String dataInicio = DateHelp.dateToString(tanqueSelecionado.getDataInicio());
+        String dataFim = DateHelp.dateToString(tanqueSelecionado.getDataFim());
         txtQuantidadePeixes.setText(String.valueOf(tanqueSelecionado.getQtdAlevinos()));
         txtPrecoManutencao.setText(String.valueOf(tanqueSelecionado.getPrecoManutencao()));
         txtDataInicio.setText(dataInicio);
+        txtDataFim.setText(dataFim);
         txtPesoMedioInicio.setText(String.valueOf(tanqueSelecionado.getPesoMedioInicial()));
+        cbEspecie.setValue(tanqueSelecionado.getEspecieCriada());
     }
 
     public void excluir(ActionEvent actionEvent) {
@@ -206,13 +211,16 @@ public class GerenciarTanque implements Initializable {
             tanqueSelecionado = new Tanque();
 
         Date dataInicio = null;
+        Date dataFim = null;
         try {
             dataInicio = DateHelp.stringToDate(txtDataInicio.getText());
+            dataFim = DateHelp.stringToDate(txtDataFim.getText());
         } catch (ParseException e) {
             e.printStackTrace();
         }
         tanqueSelecionado.setEspecieCriada(cbEspecie.getValue());
         tanqueSelecionado.setDataInicio(dataInicio);
+        tanqueSelecionado.setDataFim(dataFim);
         tanqueSelecionado.setPesoMedioInicial(Double.parseDouble(txtPesoMedioInicio.getText()));
         tanqueSelecionado.setQtdAlevinos(Integer.parseInt(txtQuantidadePeixes.getText()));
         tanqueSelecionado.setPrecoManutencao(Double.parseDouble(txtPrecoManutencao.getText()));
@@ -228,7 +236,7 @@ public class GerenciarTanque implements Initializable {
     // PRECISA DOS NOMES CORRETOS DOS ITENS DO VIEW
     public void associarValoresComColunas(){
         cEspecie.setCellValueFactory(new PropertyValueFactory<Tanque, Peixe>("especieCriada"));
-        cDataInicio.setCellValueFactory(new PropertyValueFactory<Tanque, Date>("dataInicio"));
+        cDataInicio.setCellValueFactory(new PropertyValueFactory<Tanque, String>("dataInicio"));
         cQuantidadePeixes.setCellValueFactory(new PropertyValueFactory<Tanque, Integer>("qtdAlevinos"));
     }
 

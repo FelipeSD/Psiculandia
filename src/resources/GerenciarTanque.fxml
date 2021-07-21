@@ -42,11 +42,10 @@
                <children>
                   <ComboBox fx:id="cbEspecie" prefHeight="25.0" prefWidth="179.0" promptText="Espécie" />
                   <TextField fx:id="txtQuantidadePeixes" prefHeight="25.0" prefWidth="129.0" promptText="Quantidade peixes" />
-                  <TextField fx:id="txtPrecoManutencao" prefHeight="25.0" prefWidth="117.0" promptText="Preço manutenção" />
-                  <TextField fx:id="txtDataInicio" prefHeight="25.0" prefWidth="177.0" promptText="Data início" />
-                  <TextField fx:id="txtDataInicio1" prefHeight="25.0" prefWidth="162.0" promptText="Data início" />
-                  <TextField fx:id="txtPesoMedioInicio" prefHeight="25.0" prefWidth="123.0" promptText="Peso médio inicial" />
-                  <TextField fx:id="txtQuantidadeRacaoDiaria" prefHeight="25.0" prefWidth="163.0" promptText="Quantidade ração diária" />
+                  <TextField fx:id="txtPrecoManutencao" prefHeight="25.0" prefWidth="147.0" promptText="Preço manutenção" />
+                  <TextField fx:id="txtPesoMedioInicio" prefHeight="25.0" prefWidth="145.0" promptText="Peso médio inicial" />
+                  <TextField fx:id="txtDataInicio" prefHeight="25.0" prefWidth="179.0" promptText="Data início" />
+                  <TextField fx:id="txtDataFim" prefHeight="25.0" prefWidth="129.0" promptText="Data fim" />
                   <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="633.0" spacing="10.0">
                      <children>
                         <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvar" text="Salvar" />
@@ -57,7 +56,7 @@
             </FlowPane>
          </children>
       </VBox>
-      <VBox layoutX="14.0" layoutY="342.0" prefHeight="200.0" prefWidth="633.0">
+      <VBox layoutX="14.0" layoutY="342.0" prefHeight="200.0" prefWidth="633.0" spacing="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Histórico semanal" />
             <TableView fx:id="tableViewHistoricoSemanal" prefHeight="95.0" prefWidth="634.0">

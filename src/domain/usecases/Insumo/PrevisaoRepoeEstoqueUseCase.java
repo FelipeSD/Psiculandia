@@ -25,10 +25,11 @@ public class PrevisaoRepoeEstoqueUseCase {
             throw new EntityNotFoundException("Tanque não encontrado.");
         }
 
-        String especie = tanque.getEspecieCriada();
-        Optional<Peixe> peixeInMemory = peixeDAO.findByEspecie(especie);
-        Peixe peixeEncontrado = peixeInMemory.get();
+//        String especie = tanque.getEspecieCriada();
+//        Optional<Peixe> peixeInMemory = peixeDAO.findByEspecie(especie);
+//        Peixe peixeEncontrado = peixeInMemory.get();
 
+        Peixe peixeEncontrado = tanque.getEspecieCriada();
         double qtdPeixe = tanque.getQtdAlevinos();
         Insumo insumoPeixe = peixeEncontrado.getRacaoConsumida();
         double qtdeRacaoAdministrada = peixeEncontrado.getQtdRacaoDiaria()*qtdPeixe;

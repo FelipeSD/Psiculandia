@@ -5,6 +5,7 @@ import domain.entities.Cliente.Cliente;
 import domain.entities.Peixe.Peixe;
 import domain.entities.Venda.Venda;
 import domain.entities.Venda.Venda;
+import domain.utils.DateHelp;
 import domain.utils.ShowAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -129,6 +130,7 @@ public class GerenciarVenda implements Initializable {
     }
 
     private void preencherDadosVenda() {
+
         txtData.setText(String.valueOf(vendaSelecionado.getData()));
         txtValor.setText(String.valueOf(vendaSelecionado.getValor()));
         cbCliente.setValue(vendaSelecionado.getCliente());
@@ -203,8 +205,7 @@ public class GerenciarVenda implements Initializable {
             vendaSelecionado = new Venda();
 
         try {
-            String dataString = txtData.getText();
-            Date dataVenda = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
+            Date dataVenda = DateHelp.stringToDate(txtData.getText());
             vendaSelecionado.setCliente(cbCliente.getValue());
             vendaSelecionado.setPeixeVendido(cbPeixe.getValue());
             vendaSelecionado.setValor(Double.parseDouble(txtValor.getText()));

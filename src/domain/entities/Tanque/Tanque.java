@@ -1,34 +1,56 @@
 package domain.entities.Tanque;
 
+import domain.entities.Peixe.Peixe;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Tanque {
     private int id; // número de identificação
-    private String especieCriada;
+    private Peixe especieCriada;
     private int qtdAlevinos;
     private double precoManutencao;
-    // private double pesoMedioPeixe; // o peso médio do peixe é alterado semanalmente para identificar o crescimento (foi criado uma outra classe)
-    private String dataInicio;
-    private String dataFim;
+    private Date dataInicio;
+    private Date dataFim;
+    private double pesoMedioInicial;
     private boolean checkAlimentado;
     private ArrayList<HistoricoSemanalCrescimento> historicoSemanalCrescimento = new ArrayList<HistoricoSemanalCrescimento>();
 
     public Tanque() {
     }
 
-     public Tanque(String especieCriada, int qtdAlevinos) {
+     public Tanque(Peixe especieCriada, int qtdAlevinos) {
         this.especieCriada = especieCriada;
         this.qtdAlevinos = qtdAlevinos;
     }
 
-    public Tanque(int id, String especieCriada, int qtdAlevinos, double precoManutencao, String dataInicio, String dataFim, int checkAlimentado) {
+    public Tanque(int id, Peixe especieCriada, int qtdAlevinos, double precoManutencao, Date dataInicio, Date dataFim, double pesoMedioInicial, int checkAlimentado) {
         this.id = id;
         this.especieCriada = especieCriada;
         this.qtdAlevinos = qtdAlevinos;
         this.precoManutencao = precoManutencao;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
+        this.pesoMedioInicial = pesoMedioInicial;
         this.checkAlimentado = checkAlimentado == 1;
+    }
+
+
+
+    public double getPesoMedioInicial() {
+        return pesoMedioInicial;
+    }
+
+    public void setPesoMedioInicial(double pesoMedioInicial) {
+        this.pesoMedioInicial = pesoMedioInicial;
+    }
+
+    public ArrayList<HistoricoSemanalCrescimento> getHistoricoSemanalCrescimento() {
+        return historicoSemanalCrescimento;
+    }
+
+    public void setHistoricoSemanalCrescimento(ArrayList<HistoricoSemanalCrescimento> historicoSemanalCrescimento) {
+        this.historicoSemanalCrescimento = historicoSemanalCrescimento;
     }
 
     public int getId() {
@@ -39,11 +61,11 @@ public class Tanque {
         this.id = id;
     }
 
-    public String getEspecieCriada() {
+    public Peixe getEspecieCriada() {
         return especieCriada;
     }
 
-    public void setEspecieCriada(String especieCriada) {
+    public void setEspecieCriada(Peixe especieCriada) {
         this.especieCriada = especieCriada;
     }
 
@@ -63,19 +85,19 @@ public class Tanque {
         this.precoManutencao += precoManutencao;
     }
 
-    public String getDataInicio() {
+    public Date getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(String dataInicio) {
+    public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public String getDataFim() {
+    public Date getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(String dataFim) {
+    public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
     }
 

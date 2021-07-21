@@ -84,7 +84,7 @@ public class Main {
         removePeixeUseCase = new RemovePeixeUseCase(peixeDAO);
         findPeixeUseCase = new FindPeixeUseCase(peixeDAO);
 
-        TanqueDAO tanqueDAO = new InMemoryTanqueDAO();
+        TanqueDAO tanqueDAO = new SqliteTanqueDAO();
         createTanqueUseCase = new CreateTanqueUseCase(tanqueDAO);
         updateTanqueUseCase = new UpdateTanqueUseCase(tanqueDAO);
         removeTanqueUseCase = new RemoveTanqueUseCase(tanqueDAO);

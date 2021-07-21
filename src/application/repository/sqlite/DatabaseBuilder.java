@@ -124,9 +124,10 @@ public class DatabaseBuilder {
         builder.append("especieCriada INTEGER NOT NULL, \n");
         builder.append("qtdAlevinos INTEGER NOT NULL, \n");
         builder.append("precoManutencao REAL NOT NULL, \n");
-        builder.append("dataInicio TEXT NOT NULL, \n");
-        builder.append("dataFim TEXT NOT NULL, \n");
-        builder.append("checkAlimentado INTEGER NOT NULL, \n");
+        builder.append("dataInicio TEXT, \n");
+        builder.append("dataFim TEXT, \n");
+        builder.append("pesoMedioIncial REAL, \n");
+        builder.append("checkAlimentado INTEGER, \n");
         builder.append("FOREIGN KEY(especieCriada) REFERENCES Peixe(id) \n");
         builder.append("); \n");
 

@@ -6,6 +6,7 @@ import domain.entities.Venda.Venda;
 import domain.entities.Peixe.Peixe;
 import domain.entities.Venda.Venda;
 import domain.usecases.Venda.VendaDAO;
+import domain.utils.DateHelp;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,8 +27,7 @@ public class SqliteVendaDAO implements VendaDAO {
         String sql = "INSERT INTO Venda(data, peixeVendido, qtde, valor, " +
                 "cliente) VALUES (?, ?, ?, ?, ?)";
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = dateFormat.format(venda.getData());
+        String strDate = DateHelp.dateToString(venda.getData());
 
         try(PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)){
             stmt.setString(1, strDate);
@@ -85,8 +85,7 @@ public class SqliteVendaDAO implements VendaDAO {
         String sql = "UPDATE Venda SET data = ?, peixeVendido = ?, qtde = ?, valor = ?, " +
                 "cliente = ? WHERE id = ?";
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = dateFormat.format(venda.getData());
+        String strDate =  DateHelp.dateToString(venda.getData());
 
         try(PreparedStatement stmt = ConnectionFactory.createPreparedStatement(sql)){
             stmt.setString(1, strDate);
@@ -94,7 +93,7 @@ public class SqliteVendaDAO implements VendaDAO {
             stmt.setDouble(3, venda.getQtde());
             stmt.setDouble(4, venda.getValor());
             stmt.setInt(5, venda.getCliente().getId());
-            stmt.setInt(7, venda.getId());
+            stmt.setInt(6, venda.getId());
             stmt.execute();
 
             return true;
@@ -130,11 +129,11 @@ public class SqliteVendaDAO implements VendaDAO {
 
         Date dataVenda = null;
         try {
-            String dataString = rs.getString("data");
-            dataVenda = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
+            dataVenda = DateHelp.stringToDate(rs.getString("data"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         return new Venda(
                 rs.getInt("id"),
                 dataVenda,

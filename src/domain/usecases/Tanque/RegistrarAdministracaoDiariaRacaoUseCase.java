@@ -29,11 +29,13 @@ public class RegistrarAdministracaoDiariaRacaoUseCase {
             return false;
         }
 
-        String especie = tanque.getEspecieCriada();
         int quantidadePeixe = tanque.getQtdAlevinos();
 
-        Optional<Peixe> peixeInMemory = peixeDAO.findByEspecie(especie);
-        Peixe peixeEncontrado = peixeInMemory.get();
+//        String especie = tanque.getEspecieCriada();
+//        Optional<Peixe> peixeInMemory = peixeDAO.findByEspecie(especie);
+//        Peixe peixeEncontrado = peixeInMemory.get();
+        Peixe peixeEncontrado = tanque.getEspecieCriada();
+
         Insumo racao = peixeEncontrado.getRacaoConsumida();
         double qtdeRacao = peixeEncontrado.getQtdRacaoDiaria();
 

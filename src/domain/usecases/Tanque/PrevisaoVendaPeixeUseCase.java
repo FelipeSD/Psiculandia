@@ -24,9 +24,10 @@ public class PrevisaoVendaPeixeUseCase {
             throw new EntityNotFoundException("Tanque não encontrado.");
         }
 
-        String especie = tanque.getEspecieCriada();
-        Optional<Peixe> peixeInMemory = peixeDAO.findByEspecie(especie);
-        Peixe peixeEncontrado = peixeInMemory.get();
+            //String especie = tanque.getEspecieCriada();
+//        Optional<Peixe> peixeInMemory = peixeDAO.findByEspecie(especie);
+//        Peixe peixeEncontrado = peixeInMemory.get();
+        Peixe peixeEncontrado = tanque.getEspecieCriada();
 
         int quantidadePeixe = tanque.getQtdAlevinos();
         double pesoIdealVenda = peixeEncontrado.getPesoIdealVenda();

@@ -23,3 +23,6 @@ e persistência realizada na memória, sem banco de dados.
 ### <a href="https://github.com/FelipeSD/Psiculandia/tree/psiculandia_app">psiculandia_app</a>
 Na branch psiculandia_app se encontra a parte da 2ª entrega do trabalho. Objetivo: aproveitar o fluxo básico desenvolvido utilizando o banco de dados SQLite com JavaFX 
 para implementação das interfaces do usuário.
+
+### GIF UI App
+![psiculandia](https://user-images.githubusercontent.com/18513213/127508285-233cfb0b-29a7-4413-87f8-5705e931a06e.gif)

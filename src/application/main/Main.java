@@ -1,9 +1,7 @@
 package application.main;
 
-import application.repository.inmemory.*;
 import application.repository.sqlite.*;
 import application.view.WindowLoader;
-import domain.entities.Estoque.Estoque;
 import domain.usecases.Cliente.*;
 import domain.usecases.Estoque.*;
 import domain.usecases.Fornecedor.*;

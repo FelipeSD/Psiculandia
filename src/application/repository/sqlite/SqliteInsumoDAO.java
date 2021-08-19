@@ -1,6 +1,5 @@
 package application.repository.sqlite;
 
-import application.repository.sqlite.ConnectionFactory;
 import domain.entities.Fornecedor.Fornecedor;
 import domain.entities.Insumo.Insumo;
 import domain.usecases.Insumo.InsumoDAO;

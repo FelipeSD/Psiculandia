@@ -1,8 +1,6 @@
 package application.repository.sqlite;
 
 import domain.entities.Cliente.Cliente;
-import domain.entities.Insumo.Insumo;
-import domain.entities.Venda.Venda;
 import domain.entities.Peixe.Peixe;
 import domain.entities.Venda.Venda;
 import domain.usecases.Venda.VendaDAO;
@@ -11,15 +9,14 @@ import domain.utils.DateHelp;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static application.main.Main.*;
+import static application.main.Main.findClienteUseCase;
+import static application.main.Main.findPeixeUseCase;
 
 public class SqliteVendaDAO implements VendaDAO {
     @Override

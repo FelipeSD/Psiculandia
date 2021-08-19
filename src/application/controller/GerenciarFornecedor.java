@@ -13,7 +13,6 @@ import javafx.scene.layout.FlowPane;
 
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static application.main.Main.*;

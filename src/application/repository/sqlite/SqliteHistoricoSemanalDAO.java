@@ -1,8 +1,6 @@
 package application.repository.sqlite;
 
-import domain.entities.Historico.Historico;
 import domain.entities.Tanque.HistoricoSemanalCrescimento;
-import domain.entities.Tanque.Tanque;
 import domain.utils.DateHelp;
 
 import java.sql.PreparedStatement;

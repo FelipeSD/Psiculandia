@@ -1,8 +1,6 @@
 package domain.usecases.Insumo;
 
-import domain.entities.Estoque.Estoque;
 import domain.entities.Insumo.Insumo;
-import domain.usecases.Estoque.EstoqueDAO;
 import domain.utils.EntityNotFoundException;
 
 public class UpdateInsumoUseCase {

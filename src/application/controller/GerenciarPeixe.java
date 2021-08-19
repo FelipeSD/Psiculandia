@@ -3,7 +3,6 @@ package application.controller;
 import domain.entities.Fornecedor.Fornecedor;
 import domain.entities.Insumo.Insumo;
 import domain.entities.Peixe.Peixe;
-import domain.entities.Peixe.Peixe;
 import domain.utils.ShowAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

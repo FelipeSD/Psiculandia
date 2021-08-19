@@ -1,9 +1,7 @@
 package application.controller;
 
 import domain.entities.Cliente.Cliente;
-import domain.entities.Cliente.Cliente;
 import domain.entities.Peixe.Peixe;
-import domain.entities.Venda.Venda;
 import domain.entities.Venda.Venda;
 import domain.utils.DateHelp;
 import domain.utils.ShowAlert;
@@ -18,7 +16,6 @@ import javafx.scene.layout.FlowPane;
 
 import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;

@@ -7,7 +7,6 @@ import domain.usecases.Peixe.PeixeDAO;
 import domain.utils.EntityNotFoundException;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class PrevisaoVendaPeixeUseCase {
     private final TanqueDAO tanqueDAO;

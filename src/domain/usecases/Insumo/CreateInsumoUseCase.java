@@ -1,8 +1,6 @@
 package domain.usecases.Insumo;
 
-import domain.entities.Estoque.Estoque;
 import domain.entities.Insumo.Insumo;
-import domain.usecases.Estoque.EstoqueDAO;
 
 public class CreateInsumoUseCase {
     private final InsumoDAO insumoDAO;

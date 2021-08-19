@@ -1,9 +1,7 @@
 package application.repository.sqlite;
 
-import domain.entities.Fornecedor.Fornecedor;
 import domain.entities.Peixe.Peixe;
 import domain.entities.Tanque.Tanque;
-import domain.entities.Venda.Venda;
 import domain.usecases.Tanque.TanqueDAO;
 import domain.utils.DateHelp;
 
@@ -16,7 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static application.main.Main.findFornecedorUseCase;
 import static application.main.Main.findPeixeUseCase;
 
 public class SqliteTanqueDAO implements TanqueDAO {

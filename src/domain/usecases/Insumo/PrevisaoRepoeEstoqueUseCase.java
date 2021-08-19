@@ -8,8 +8,6 @@ import domain.usecases.Peixe.PeixeDAO;
 import domain.usecases.Tanque.TanqueDAO;
 import domain.utils.EntityNotFoundException;
 
-import java.util.Optional;
-
 public class PrevisaoRepoeEstoqueUseCase {
     private final PeixeDAO peixeDAO;
     private final TanqueDAO tanqueDAO;

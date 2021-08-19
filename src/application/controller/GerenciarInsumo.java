@@ -1,6 +1,5 @@
 package application.controller;
 
-import domain.entities.Insumo.Insumo;
 import domain.entities.Fornecedor.Fornecedor;
 import domain.entities.Insumo.Insumo;
 import domain.utils.ShowAlert;
@@ -18,7 +17,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static application.main.Main.*;
-import static application.main.Main.updateInsumoUseCase;
 
 public class GerenciarInsumo implements Initializable {
     public Button btnAdicionar;
